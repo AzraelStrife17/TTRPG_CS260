@@ -29,15 +29,18 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Ability to Save Characters
+- Create Characters From Scratch
+- Receive live roll and status updates from party members
+- Able to roll die from application
+- Add characters to a campaign session
+- Secure login through https
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
+- **HTML** - Use html to build 4 webpages: Login page, dashboard to interact with character sheets, character sheet page, and one page that is an about page.
 - **CSS** - Description here
 - **React** - Description here
 - **Service** - Description here
