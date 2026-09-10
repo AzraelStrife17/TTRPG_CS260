@@ -44,10 +44,10 @@ I am going to use the required technologies in the following ways.
 - **CSS** - Application styling to provide a user UI that is functional and aesthetically pleasing on multiple devices.
 - **React** - Provides login, a display of your built characters, provides campaign joining, calculating die rolls.
 - **Service** - Backend service with endpoints for:
-        -Login
-        -Joining Campaigns
-        -Retrieving Die Results
-        -Retrieving Party HP
+        - Login
+        - Joining Campaigns
+        - Retrieving Die Results
+        - Retrieving Party HP
 - **Web Service API** - [Open5E](https://open5e.com), will be updated if any future API's used    
 - **DB/Login** - Store users, character sheets, campaign sessions, credentials securely stored in database
 - **WebSocket** - As a dice is rolled or a party members HP changes it will be broadcasted to all players in campaign session.
