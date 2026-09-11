@@ -18,14 +18,7 @@ Tired of keeping track of all your paper character sheets. Ever speculated that 
 
 ![Design image](placeholder.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-```mermaid
-sequenceDiagram
-    actor You
-    actor Website
-    You->>Website: Replace this with your design
-```
 
 ### Key features
 
@@ -44,10 +37,10 @@ I am going to use the required technologies in the following ways.
 - **CSS** - Application styling to provide a user UI that is functional and aesthetically pleasing on multiple devices.
 - **React** - Provides login, a display of your built characters, provides campaign joining, calculating die rolls.
 - **Service** - Backend service with endpoints for:
-        - Login
-        - Joining Campaigns
-        - Retrieving Die Results
-        - Retrieving Party HP
+    - Login
+    - Joining Campaigns
+    - Retrieving Die Results
+    - Retrieving Party HP
 - **Web Service API** - [Open5E](https://open5e.com), will be updated if any future API's used    
 - **DB/Login** - Store users, character sheets, campaign sessions, credentials securely stored in database
 - **WebSocket** - As a dice is rolled or a party members HP changes it will be broadcasted to all players in campaign session.
