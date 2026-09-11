@@ -16,7 +16,9 @@ Tired of keeping track of all your paper character sheets. Ever speculated that 
 
 ### Design
 
-![Design image](placeholder.png)
+![Design image](CS260_Startup_Login.jpg)
+![Design image](260_Character_Sheet.jpg)
+![Design image](260_Dashboard.jpg)
 
 
 
