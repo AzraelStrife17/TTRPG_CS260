@@ -1,84 +1,116 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>D&D Buddy</title>
+    </head>
+    
+    <body>
+        <header>
+            <h1>D&D Buddy<sup>&reg;</sup></h1>
+            <nav>
+                <menu>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="about.html">About</a></li>
+                </menu>
+            </nav>
+        </header>
+        <p>Dr. Tofu Logged In</p>
+        <main>
+            <h1>Character Sheet</h1>
+            <div>
+                <img class="portrait" src="../dr.tofu.png" alt="Dr. Tofu" width="100" height="200">
+            </div>
 
-    <main>
-        <h1>Character Sheet</h1>
-        <div>
-            <img class="portrait" src="../dr.tofu.png" alt="Dr. Tofu" width="100" height="200">
-        </div>
+            <div class="edit_button">
+                <button type="button">Edit</button>
+            </div>
 
-        <div class="edit_button">
-            <button type="submit">Edit</button>
-        </div>
+            <div class="ability_checks">
+                <h2>Ability Checks</h2>
+                <button type="button">Strength</button>
+                <button type="button">Dexterity</button>
+                <button type="button">Constitution</button>
+                <button type="button">Intelligence</button>
+                <button type="button">Wisdom</button>
+                <button type="button">Charisma</button>
+            </div>
 
-        <div class="ability_checks">
-            <h2>Ability Checks</h2>
-            <button type="submit">Strength</button>
-            <button type="submit">Dexterity</button>
-            <button type="submit">Constitution</button>
-            <button type="submit">Intelligence</button>
-            <button type="submit">Wisdom</button>
-            <button type="submit">Charisma</button>
-        </div>
+            <div class="hp">
+                <label for="hp">HP</label>
+                <input id="hp" type="number" value="24" min="0" max="30">
+            </div>
 
-        <div class="hp">
-            <label for="hp">HP</label>
-            <input id="hp" type="number" value="24" min="0" max="30">
-        </div>
+            <div class="ac">
+                <strong>AC</strong>
+            </div>
 
-        <div class="ac">
-            <strong>AC</strong>
-        </div>
+            <div class="actions">
+                <h2>Actions</h2>
+                <button type="button">Attack Roll</button>
+                <button type="button">Spell Roll</button>
+                <button type="button">Bonus Action</button>
+            </div>
 
-        <div class="actions">
-            <h2>Actions</h2>
-            <button>Attack Roll</button>
-            <button>Spell Roll</button>
-            <button>Bonus Action</button>
-        </div>
+            <div class="saving_throws">
+                <h2>Saving Throws</h2>
+                <button type="button">STR</button>
+                <button type="button">DEX</button>
+                <button type="button">CON</button>
+                <button type="button">INT</button>
+                <button type="button">WIS</button>
+                <button type="button">CHA</button>
+            </div>
 
-        <div class="saving_throws">
-            <h2>Saving Throws</h2>
-            <button type="submit">STR</button>
-            <button type="submit">DEX</button>
-            <button type="submit">CON</button>
-            <button type="submit">INT</button>
-            <button type="submit">WIS</button>
-            <button type="submit">CHA</button>
-        </div>
+            <div class="skill_check">
+                <h2>Skill Checks</h2>
+                <button type="button">Acrobatics</button>
+                <button type="button">Animal Handling</button>
+                <button type="button">Arcana</button>
+                <button type="button">Athletics</button>
+                <button type="button">Deception</button>
+                <button type="button">History</button>
+                <button type="button">Insight</button>
+                <button type="button">Intimidation</button>
+                <button type="button">Investigation</button>
+                <button type="button">Medicine</button>
+                <button type="button">Nature</button>
+                <button type="button">Perception</button>
+                <button type="button">Performance</button>
+                <button type="button">Persuasion</button>
+                <button type="button">Religion</button>
+                <button type="button">Sleight of Hands</button>
+                <button type="button">Stealth</button>
+                <button type="button">Survival</button>
+            </div>
 
-        <div class="skill_check">
-            <h2>Skill Checks</h2>
-            <button type="submit">Acrobatics</button>
-            <button type="submit">Animal Handling</button>
-            <button type="submit">Arcana</button>
-            <button type="submit">Athletics</button>
-            <button type="submit">Deception</button>
-            <button type="submit">History</button>
-            <button type="submit">Insight</button>
-            <button type="submit">Intimidation</button>
-            <button type="submit">Investigation</button>
-            <button type="submit">Medicine</button>
-            <button type="submit">Nature</button>
-            <button type="submit">Perception</button>
-            <button type="submit">Performance</button>
-            <button type="submit">Persuasion</button>
-            <button type="submit">Religion</button>
-            <button type="submit">Sleight of Hands</button>
-            <button type="submit">Stealth</button>
-            <button type="submit">Survival</button>
-        </div>
-        
+            <section class="api_placeholder"> 
+                <h2>Open5e API Data</h2>
+                <p>This will display Character info, spell data, class and ect.</p>
+                <h3>Class Info</h3>
+                <p>Paladin</p>
+                <p>Hit die: d10</p>
+            </section>
+            
 
-        <div class="real_time_actions">
-            <h2>recent actions</h2>
-            <p>Live Rolls displayed here (Websocket Placeholder)</p>
-            <ul>
-                <li>Dr.Tofu rolled a 20 on wisdom</li>
-                <li>Holy Mackerel rolled 1 on intelligence</li>
-            </ul>
-        </div>
+            <div class="real_time_actions">
+                <h2>Recent Actions</h2>
+                <p>Live Rolls displayed here (Websocket Placeholder)</p>
+                <ul>
+                    <li>Dr.Tofu rolled a 20 on wisdom</li>
+                    <li>Holy Mackerel rolled 1 on intelligence</li>
+                </ul>
+            </div>
+        </main>
 
-    </main>
+        <footer>
+            <hr />
+            <span class="text-reset">Adam Leishman</span>
+            <br />
+            <a href="https://github.com/AzraelStrife17/TTRPG_CS260">GitHub</a>
+        </footer>
+    </body>
 
 </html>
