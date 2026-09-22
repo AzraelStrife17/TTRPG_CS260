@@ -6,26 +6,40 @@
 
     <body>
         <header>
-            <h1>D&D Buddy</h1>
+            <h1>D&D Buddy<sup>&reg;</sup></h1>
+            <nav>
+                <menu>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="about.html">About</a></li>
+                </menu>
+            </nav>
         </header>
+
+        <main>
+            <h1>Welcome to D&D Buddy</h1>
+            <form method="get" action="dashboard.html">
+                <div>
+                    <span>@</span>
+                    <input type="text" placeholder="your@email.com">
+                </div>
+
+                <div>
+                    <span>🔒</span>
+                    <input type="password" placeholder="password">
+                </div>
+
+                <button type="submit">Login</button>
+                <button type="submit">Create</button>
+            </form>
+        </main>
+        
+        <footer>
+            <hr />
+            <span class="text-reset">Adam Leishman</span>
+            <br />
+            <a href="https://github.com/AzraelStrife17/TTRPG_CS260">GitHub</a>
+        </footer>
     </body>
-
-    <main>
-        <h1>Welcome to D&D Buddy</h1>
-        <form method="get" action="dashboard.html">
-            <div>
-                <span>@</span>
-                <input type="text" placeholder="your@email.com">
-            </div>
-            <div>
-                <span>🔒</span>
-                <input type="password" placeholder="password">
-            </div>
-            <button type="submit">Login</button>
-            <button type="submit">Create</button>
-        </form>
-    </main>
-
-
 
 </html>
