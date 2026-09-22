@@ -58,9 +58,9 @@
             <Section class="campaign_join">
                 <h2>Join Campaign</h2>
                 <form>
-                    <lablel for="campaign_code">Campaign Code</lablel>
+                    <label for="campaign_code">Campaign Code</lablel>
                     <input id="campaign_code" type="text" placeholder="Enter Campaign Code Here">
-                    <select>
+                    <select id="character_select">
                         <option value="">Select a Character</option>
                         <option value="anby">Anby</option>
                         <option value="dr_tofu">Dr. Tofu</option>
@@ -69,6 +69,34 @@
                     <button type="button">Join</button>
                 </form>
             </Section>
+
+        <section class="create_campaign">
+            <h2>Create Campaign Code</h2>
+            <form>
+                <label for="_create_campaign_code">Create Code</label>
+                <input id="create_campaign_code" type="text" placeholder="Enter Campaign Code Here">
+                <button type="submit">Create</button>
+            </form>
+        </section>
+
+        <section class="active_campaigns">
+            <h2>Active Campaigns</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Character</th>
+                        <th>Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Anby</td>
+                        <td>SecretCode</td>
+                        <td><button type="button">Leave Campaign</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
         </main>
 
