@@ -65,24 +65,24 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Rented EC2 server** - I did not complete this part of the deliverable.
-- [ ] **Leased domain name** - I did not complete this part of the deliverable.
-- [ ] **Server accessible** from my domain: [https://yourdomainnamehere.click](https://yourdomainnamehere.click) - I did not complete this part of the deliverable.
+- [X] **Rented EC2 server** - Completed.
+- [X] **Leased domain name** - Completed.
+- [X] **Server accessible** from my domain: [D&D Buddy](https://dndbuddy.click) - I did not complete this part of the deliverable.
 
 ## 🚀 HTML deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [X] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [X] **HTML pages** - Created 4 html pages: Index, Character Sheet, About, and Dashboard
+- [X] **Proper HTML element usage** - Used tags such as <main>, <body>, <footer>, <header>, <section>, <div>, ect.
+- [X] **Links** - Login page auto goes to dashboard when logging in or creating a user, header with links to all pages besides character sheet. Character sheet is accessible by clicking on the character in dashboard
+- [X] **Text** - Text throughout the webpage such as naming different sections and the paragraph tag in the about page
+- [X] **3rd party API placeholder** - Placeholder pointing to where Open 5E will be implemented
+- [X] **Images** - Placeholder picture for character portraits on character sheet
+- [X] **Login placeholder** - Login placeholder page completed with submit buttons
+- [X] **DB data placeholder** - In the form of the "My Character" table and "Active Campaign Table" on the dashboard which will be replaced by the database when implemented
+- [X] **WebSocket placeholder** - Recent actions section on the Character sheet is where the result of die roll actions will be broadcast to everyone in the campaign
 
 ## 🚀 CSS deliverable
 
