@@ -6,42 +6,77 @@
 
     <body>
         <header>
-            <h1>D&D Buddy</h1>
+            <h1>D&D Buddy<sup>&reg;</sup></h1>
+            <nav>
+                <menu>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="about.html">About</a></li>
+                </menu>
+            </nav>
         </header>
+        <p>Dr. Tofu Logged In</p>
+
+        <main>
+            <section class="saved_characters">
+                <h2>My Characters</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Level</th>
+                            <th>Class</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td><a href="charactersheet.html">Anby</a></td>
+                            <td>7</td>
+                            <td>Fighter</td>
+                        </tr>
+
+                        <tr>
+                            <td><a href="charactersheet.html">Pyrois</a></td>
+                            <td>19</td>
+                            <td>Warlock</td>
+                        </tr>
+
+                        <tr>
+                            <td><a href="charactersheet.html">Dr.Tofu</a></td>
+                            <td>20</td>
+                            <td>Paladin</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <form method="get" action="charactersheet.html">
+                <button type="submit">Create Character</button>
+            </form>
+
+            <Section class="campaign_join">
+                <h2>Join Campaign</h2>
+                <form>
+                    <lablel for="campaign_code">Campaign Code</lablel>
+                    <input id="campaign_code" type="text" placeholder="Enter Campaign Code Here">
+                    <select>
+                        <option value="">Select a Character</option>
+                        <option value="anby">Anby</option>
+                        <option value="dr_tofu">Dr. Tofu</option>
+                        <option value="pyrois">Pyrois</option>
+                    </select>
+                    <button type="button">Join</button>
+                </form>
+            </Section>
+
+        </main>
+
+        <footer>
+            <hr />
+            <span class="text-reset">Adam Leishman</span>
+            <br />
+            <a href="https://github.com/AzraelStrife17/TTRPG_CS260">GitHub</a>
+        </footer>
     </body>
-
-    <main>
-        <section class="saved_characters">
-            <h2>My Characters</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Level</th>
-                        <th>Class</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <th>Anby</th>
-                        <th>7</th>
-                        <th>Fighter</th>
-                    </tr>
-
-                    <tr>
-                        <th>Pyrois</th>
-                        <th>19</th>
-                        <th>Warlock</th>
-                    </tr>
-
-                    <tr>
-                        <th>Dr.Tofu</th>
-                        <th>20</th>
-                        <th>Paladin</th>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-    </main>
 </html>
