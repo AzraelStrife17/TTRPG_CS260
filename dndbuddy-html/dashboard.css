@@ -44,3 +44,41 @@ header p {
     display: flex;
     margin-left: auto;
 }
+
+.dashboard_sections {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    justify-content: space-between;
+    gap: 10px
+}
+
+.saved_characters {
+    padding-left: 20px;
+    font-size: 35px;
+}
+
+.saved_characters a,
+.saved_characters a:visited {
+  color: #f0e5cc;
+  text-decoration: none;
+}
+
+.saved_characters a:hover {
+  color: #c49a58;
+}
+
+.character_table table{
+    border-collapse: collapse;
+    border: 5px solid rgb(104, 1, 1);
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+}
+
+.character_table th,
+.character_table td {
+    border-bottom: 5px solid rgb(104, 1, 1);
+    text-align: center;
+}
+
+.character_table tr {
+    border-bottom: 5px solid rgb(104, 1, 1);;
+}
