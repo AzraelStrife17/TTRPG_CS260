@@ -1,6 +1,15 @@
-main {
-    min-width: 800px;
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+
+main {
+    flex: 1;
+    color: #f0e5cc;
+    font-family: "Cinzel", Georgia, serif;
+}
+
 body {
     background-color: #24221e;
     background-image:
@@ -43,4 +52,15 @@ header nav a:hover {
 header p {
     display: flex;
     margin-left: auto;
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    margin-top: auto;
+}
+
+footer a{
+    color: #f0e5cc;
+    text-decoration: none;
 }
