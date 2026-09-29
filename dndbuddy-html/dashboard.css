@@ -47,14 +47,14 @@ header p {
 
 .dashboard_sections {
     display: grid;
-    grid-template-columns: repeat(2, max-content);
-    justify-content: space-between;
-    gap: 10px
+    grid-template-columns: repeat(3, max-content);
+    justify-content: space-evenly;
+    gap: 100px
 }
 
 .saved_characters {
     padding-left: 20px;
-    font-size: 35px;
+    font-size: 30px;
 }
 
 .saved_characters a,
@@ -81,4 +81,12 @@ header p {
 
 .character_table tr {
     border-bottom: 5px solid rgb(104, 1, 1);;
+}
+
+.campaign_join_create {
+    font-size: 30px;
+}
+
+.campaign_active {
+    font-size: 30px;
 }
