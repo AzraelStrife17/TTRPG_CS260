@@ -55,12 +55,26 @@ header p {
 }
 
 footer {
-    display: flex;
-    flex-direction: row;
     margin-top: auto;
 }
 
-footer a{
+footer hr {
+    border: 0;
+    border-top: solid rgb(104, 1, 1);
+}
+
+.footer_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.footer_content a{
     color: #f0e5cc;
     text-decoration: none;
+}
+
+.footer_content a:hover {
+    color: #c49a58;
 }
