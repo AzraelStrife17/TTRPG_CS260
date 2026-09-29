@@ -52,10 +52,10 @@ header p {
     margin-left: auto;
 }
 
-main p {
+.about_text {
+    padding-top: 300px;
+    text-align: center;
     font-size: 30px;
-    display: flex;
-    justify-content: center;
 }
 
 footer {
