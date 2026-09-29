@@ -1,0 +1,46 @@
+main {
+    min-width: 800px;
+}
+body {
+    background-color: #24221e;
+    background-image:
+        radial-gradient(ellipse at top, #514333, transparent 65%);
+    color: #f0e5cc;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+    border-bottom: solid rgb(104, 1, 1);;
+    min-width: 800px;
+    box-sizing: border-box;
+}
+
+header h1 {
+    font-size: 24px
+}
+
+header nav menu {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    list-style: none;
+    font-size: 20px;
+}
+
+header nav a,
+header nav a:visited {
+  color: #f0e5cc;
+  text-decoration: none;
+}
+
+header nav a:hover {
+  color: #c49a58;
+}
+
+header p {
+    display: flex;
+    margin-left: auto;
+}

@@ -6,6 +6,43 @@ body {
     background-image:
         radial-gradient(ellipse at top, #514333, transparent 65%);
     color: #f0e5cc;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+    border-bottom: solid rgb(104, 1, 1);;
+    min-width: 800px;
+    box-sizing: border-box;
+}
+
+header h1 {
+    font-size: 24px
+}
+
+header nav menu {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    list-style: none;
+    font-size: 20px;
+}
+
+header nav a,
+header nav a:visited {
+  color: #f0e5cc;
+  text-decoration: none;
+}
+
+header nav a:hover {
+  color: #c49a58;
+}
+
+header p {
+    display: flex;
+    margin-left: auto;
 }
 
 main h1 {
@@ -13,11 +50,25 @@ main h1 {
     justify-content: center;
 }
 
+.portrait_hp {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    justify-content: center;
+    gap: 10px
+}
+
 .portrait {
-    display: block;
-    margin-left: auto;
     border: solid rgb(104, 1, 1);
-    width: 100px
+    width: 200px;
+    height: 300px;
+}
+
+.hp label {
+    font-size: 36px;
+}
+
+.ac strong {
+    font-size: 36px;
 }
 
 .ability_checks {
@@ -33,7 +84,7 @@ main h1 {
 }
 
 .ability_buttons {
-    background-color: rgb(100, 76, 76);
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
     border: solid rgb(104, 1, 1);
     display: flex;
     justify-content: space-between; 
@@ -60,7 +111,7 @@ main h1 {
 }
 
 .action_buttons {
-    background-color: rgb(100, 76, 76);
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
     border: solid rgb(104, 1, 1);
     flex-wrap: wrap;
     display: flex;
@@ -81,7 +132,7 @@ main h1 {
 }
 
 .saving_buttons {
-    background-color: rgb(100, 76, 76);
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
     border: solid rgb(104, 1, 1);
     flex-wrap: wrap;
     display: flex;
@@ -98,7 +149,7 @@ main h1 {
 }
 
 .skill_buttons {
-    background-color: rgb(100, 76, 76);
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
     border: solid rgb(104, 1, 1);
     display: flex;
     flex-wrap: wrap;
@@ -132,7 +183,7 @@ main h1 {
 }
 
 .api_placeholder_text {
-    background-color: rgb(100, 76, 76);
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
     border: solid rgb(104, 1, 1);
 }
 
@@ -143,6 +194,6 @@ main h1 {
 }
 
 .real_time_actions_text {
-    background-color: rgb(100, 76, 76);
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
     border: solid rgb(104, 1, 1);
 }
