@@ -1,0 +1,39 @@
+body {
+    background-color: #e8ddc3;
+    background-image: 
+        radial-gradient(ellipse at 20% 30%, #b8a77f55, trasparent 35%), 
+        radial-gradient(ellipse at 80% 70%, #9e8d6c44, trasparent 40%),
+        linear-gradient(135deg, #f5edda88, #a8997655);
+}
+
+.portrait {
+    position: absolute;
+    top: 100px;
+    right: 20px;
+    border: 4px solid black;
+}
+
+.ability_checks {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.ability_checks h2 {
+    text-align: center;
+}
+
+.ability_buttons {
+    display: flex;
+    justify-content: space-between; 
+    gap: 1rem;
+    width: 100%
+}
+
+.ability_buttons button {
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+}
+
