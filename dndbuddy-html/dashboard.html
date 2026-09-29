@@ -9,108 +9,111 @@
     </head>
 
     <body>
-        <header>
-            <h1>D&D Buddy<sup>&reg;</sup></h1>
-            <nav>
-                <menu class = tabs>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="about.html">About</a></li>
-                </menu>
-            </nav>
-            <p>Dr. Tofu Logged In</p>
-        </header>
+        <div class="page">
+            <header>
+                <h1>D&D Buddy<sup>&reg;</sup></h1>
+                <nav>
+                    <menu class = tabs>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="about.html">About</a></li>
+                    </menu>
+                </nav>
+                <p>Dr. Tofu Logged In</p>
+            </header>
 
-        <main>
-            <div class="dashboard_sections">
-                <section class="saved_characters">
-                    <h2>My Characters</h2>
-                    <div class="character_table">
-                        <table>
+            <main>
+                <div class="dashboard_sections">
+                    <section class="saved_characters">
+                        <h2>My Characters</h2>
+                        <div class="character_table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Level</th>
+                                        <th>Class</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td><a href="charactersheet.html">Anby</a></td>
+                                        <td>7</td>
+                                        <td>Fighter</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><a href="charactersheet.html">Pyrois</a></td>
+                                        <td>19</td>
+                                        <td>Warlock</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><a href="charactersheet.html">Dr.Tofu</a></td>
+                                        <td>20</td>
+                                        <td>Paladin</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <form method="get" action="charactersheet.html">
+                            <button type="submit">Create Character</button>
+                        </form>
+                    </section>
+
+                    <section class="campaign_join_create">
+                        <h2>Join Campaign</h2>
+                        <form>
+                            <label for="campaign_code">Campaign Code:</label>
+                            <input id="campaign_code" type="text" placeholder="Enter Campaign Code Here">
+                            <select id="character_select">
+                                <option value="">Select a Character</option>
+                                <option value="anby">Anby</option>
+                                <option value="dr_tofu">Dr. Tofu</option>
+                                <option value="pyrois">Pyrois</option>
+                            </select>
+                            <button type="button">Join</button>
+                        </form>
+
+                        <h2>Create Campaign Code</h2>
+                        <form>
+                            <label for="create_campaign_code">Create Code:</label>
+                            <input id="create_campaign_code" type="text" placeholder="Enter Campaign Code Here">
+                            <button type="submit">Create</button>
+                        </form>
+                    </section>
+
+                    <section class="campaign_active">
+                        <h2>Active Campaigns</h2>
+                        <table class="campaign_table">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Level</th>
-                                    <th>Class</th>
+                                    <th>Character</th>
+                                    <th>Code</th>
+                                    <th></th>
                                 </tr>
                             </thead>
-
                             <tbody>
                                 <tr>
-                                    <td><a href="charactersheet.html">Anby</a></td>
-                                    <td>7</td>
-                                    <td>Fighter</td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="charactersheet.html">Pyrois</a></td>
-                                    <td>19</td>
-                                    <td>Warlock</td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="charactersheet.html">Dr.Tofu</a></td>
-                                    <td>20</td>
-                                    <td>Paladin</td>
+                                    <td>Anby</td>
+                                    <td>SecretCode</td>
+                                    <td><button type="button">Leave</button></td>
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                    
-                    <form method="get" action="charactersheet.html">
-                        <button type="submit">Create Character</button>
-                    </form>
-                </section>
+                    </section>
+                </div>
 
-                <section class="campaign_join_create">
-                    <h2>Join Campaign</h2>
-                    <form>
-                        <label for="campaign_code">Campaign Code</label>
-                        <input id="campaign_code" type="text" placeholder="Enter Campaign Code Here">
-                        <select id="character_select">
-                            <option value="">Select a Character</option>
-                            <option value="anby">Anby</option>
-                            <option value="dr_tofu">Dr. Tofu</option>
-                            <option value="pyrois">Pyrois</option>
-                        </select>
-                        <button type="button">Join</button>
-                    </form>
+            </main>
 
-                    <h2>Create Campaign Code</h2>
-                    <form>
-                        <label for="create_campaign_code">Create Code</label>
-                        <input id="create_campaign_code" type="text" placeholder="Enter Campaign Code Here">
-                        <button type="submit">Create</button>
-                    </form>
-                </section>
-
-                <section class="campaign_active">
-                    <h2>Active Campaigns</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Character</th>
-                                <th>Code</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Anby</td>
-                                <td>SecretCode</td>
-                                <td><button type="button">Leave Campaign</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
-            </div>
-
-        </main>
-
-        <footer>
-            <hr />
-            <span class="text-reset">Adam Leishman</span>
-            <br />
-            <a href="https://github.com/AzraelStrife17/TTRPG_CS260">GitHub</a>
-        </footer>
+            <footer>
+                <hr />
+                <span class="text-reset">Adam Leishman</span>
+                <br />
+                <a href="https://github.com/AzraelStrife17/TTRPG_CS260">GitHub</a>
+            </footer>
+        </div>
     </body>
 </html>

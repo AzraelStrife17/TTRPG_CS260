@@ -1,6 +1,13 @@
-main {
-    min-width: 800px;
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+
+main {
+    flex: 1;
+}
+
 body {
     background-color: #24221e;
     background-image:
@@ -89,4 +96,34 @@ header p {
 
 .campaign_active {
     font-size: 30px;
+}
+
+.campaign_table {
+    border-collapse: collapse;
+    border: 5px solid rgb(104, 1, 1);
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+}
+
+.campaign_table th,
+.campaign_table td {
+    border-bottom: 5px solid rgb(104, 1, 1);
+    text-align: center;
+}
+
+.campaign_table tr {
+    border-bottom: 5px solid rgb(104, 1, 1);;
+}
+
+.campaign_join_create input {
+    border: 5px solid rgb(104, 1, 1);
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+}
+
+.campaign_join_create button {
+    border: 5px solid rgb(104, 1, 1);
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+}
+
+footer {
+    margin-top: auto;
 }
