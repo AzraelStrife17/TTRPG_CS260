@@ -54,6 +54,56 @@ header p {
     margin-left: auto;
 }
 
+.login_section {
+    padding-top: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 30px;
+}
+
+.login_section form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.email {
+    color: #f0e5cc;
+    border: 5px solid rgb(104, 1, 1);
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+    font-family: "Cinzel", Georgia, serif;
+}
+
+.password {
+    color: #f0e5cc;
+    border: 5px solid rgb(104, 1, 1);
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+    font-family: "Cinzel", Georgia, serif;
+}
+
+.login_section button {
+    color: #f0e5cc;
+    border: 5px solid rgb(104, 1, 1);
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 20px;
+}
+
+.login_section input {
+    color: #f0e5cc;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 30px;
+    border: none;
+    background: none;
+}
+
+.login_section button:hover {
+    color: #c49a58;
+}
+
+
 footer {
     margin-top: auto;
 }

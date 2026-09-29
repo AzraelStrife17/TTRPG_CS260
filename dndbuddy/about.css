@@ -6,6 +6,8 @@
 
 main {
     flex: 1;
+    color: #f0e5cc;
+    font-family: "Cinzel", Georgia, serif;
 }
 
 body {
