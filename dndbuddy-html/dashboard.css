@@ -6,6 +6,8 @@
 
 main {
     flex: 1;
+    color: #f0e5cc;
+    font-family: "Cinzel", Georgia, serif;
 }
 
 body {
@@ -59,6 +61,17 @@ header p {
     gap: 100px
 }
 
+.create_character_button button {
+    color: #f0e5cc;
+    border: 5px solid rgb(104, 1, 1);
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+    font-family: "Cinzel", Georgia, serif;
+}
+
+.create_character_button button:hover {
+    color: #c49a58;
+}
+
 .saved_characters {
     padding-left: 20px;
     font-size: 30px;
@@ -83,6 +96,7 @@ header p {
 .character_table th,
 .character_table td {
     border-bottom: 5px solid rgb(104, 1, 1);
+    padding: 10px;
     text-align: center;
 }
 
@@ -107,6 +121,7 @@ header p {
 .campaign_table th,
 .campaign_table td {
     border-bottom: 5px solid rgb(104, 1, 1);
+    padding: 10px;
     text-align: center;
 }
 
@@ -114,14 +129,47 @@ header p {
     border-bottom: 5px solid rgb(104, 1, 1);;
 }
 
+.campaign_table button {
+    color: #f0e5cc; 
+    background: none;
+    border: none;
+    font-size: 30px;
+    font-family: "Cinzel", Georgia, serif;
+}
+
+.campaign_table button:hover {
+    color: #c49a58;
+}
+
 .campaign_join_create input {
+    color: #f0e5cc;
     border: 5px solid rgb(104, 1, 1);
     background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+    font-family: "Cinzel", Georgia, serif;
 }
 
 .campaign_join_create button {
+    color: #f0e5cc;
     border: 5px solid rgb(104, 1, 1);
     background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+    font-family: "Cinzel", Georgia, serif;
+}
+
+.campaign_join_create button:hover {
+    color: #c49a58;
+}
+
+.select_character {
+    color: #f0e5cc;
+    border: 5px solid rgb(104, 1, 1);
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+    font-family: "Cinzel", Georgia, serif;
+}
+
+.select_character option{
+    color: #f0e5cc;
+    background: rgb(100, 76, 76);
+    font-family: "Cinzel", Georgia, serif;
 }
 
 footer {
