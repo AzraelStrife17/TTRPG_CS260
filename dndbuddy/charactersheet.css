@@ -15,28 +15,31 @@ body {
     background-image:
         radial-gradient(ellipse at top, #514333, transparent 65%);
     color: #f0e5cc;
+    font-family: "Cinzel", Georgia, serif;
     margin: 0;
 }
 
 header {
     display: flex;
-    flex-direction: row;
-    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
-    border-bottom: solid rgb(104, 1, 1);;
-    min-width: 800px;
-    box-sizing: border-box;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.5rem;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(rgb(100, 76, 76), rgb(48, 28, 28));
+    border-bottom: 2px solid rgb(104, 1, 1);
 }
 
 header h1 {
-    font-size: 24px
+    font-size: 25px
 }
 
 header nav menu {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     gap: 1rem;
     list-style: none;
-    font-size: 20px;
+    margin: 0;
+    padding: 0;
 }
 
 header nav a,
@@ -72,28 +75,39 @@ main h1 {
     height: 300px;
 }
 
-.hp label {
-    font-size: 36px;
+#hp_ac {
+    display: flex;
+    flex-direction: column;
 }
 
-.hp input {
+#hp {
     font-family: "Cinzel", Georgia, serif;
     background: none;
     border: none;
     color: #f0e5cc;
-    font-size: 36px;
+    font-size: 25px;
 }
 
-.ac strong {
-    font-size: 36px;
+label[for="hp"]{
+    font-size: 25px;
+}
+
+.hp_row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#ac {
+    font-size: 25px;
 }
 
 .ability_checks {
-    padding-top: 20px;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
-    padding-bottom: 20px;
+    gap: 1rem;
 }
 
 .ability_checks h2 {
@@ -101,12 +115,13 @@ main h1 {
 }
 
 .ability_buttons {
+    display: flex;
+    flex-wrap: wrap;
     background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
     border: solid rgb(104, 1, 1);
-    display: flex;
     justify-content: space-between; 
     gap: 1rem;
-    padding: 10px;
+    padding: 1rem;
 }
 
 .ability_buttons button {
@@ -115,10 +130,10 @@ main h1 {
 }
 
 .sections {
+    padding-top: 3rem;
     display: grid;
-    grid-template-columns: repeat(5, max-content);
-    justify-content: space-between;
-    gap: 10px
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: 1rem;
 }
 
 .actions {
@@ -135,13 +150,24 @@ main h1 {
     align-items: center;
     gap: 0.5rem;
     box-sizing: border-box;
-    padding: 5px;
+    padding: 1rem;
 }
 
 .action_buttons button {
     width: 9rem;
     box-sizing: border-box;
     white-space: normal;
+}
+
+.btn-danger {
+    background: linear-gradient( #b87064, #6e3e32);
+    border-color: #680101;
+    color: #f0e5cc;
+    border-width: 4px;
+}
+
+.btn-danger:hover {
+    color: #c49a58;
 }
 
 .saving_throws {
@@ -219,17 +245,6 @@ main h1 {
     padding: 0.75rem;
 }
 
-button {
-    color: #f0e5cc;
-    border: 5px solid rgb(104, 1, 1);
-    background: linear-gradient( #b87064, #6e3e32);
-    font-family: "Cinzel", Georgia, serif;
-}
-
-button:hover {
-    color: #c49a58;
-}
-
 footer {
     padding-top: 20px;
     margin-top: auto;
@@ -237,6 +252,7 @@ footer {
 
 footer hr {
     border: 0;
+    margin: 0;
     border-top: solid rgb(104, 1, 1);
 }
 
@@ -245,6 +261,8 @@ footer hr {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    box-sizing: border-box;
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
 }
 
 .footer_content a{
@@ -254,4 +272,16 @@ footer hr {
 
 .footer_content a:hover {
     color: #c49a58;
+}
+
+@media (max-height: 600px) {
+  header {
+    display: none;
+  }
+  footer {
+    display: none;
+  }
+  main {
+    flex: 1 100vh;
+  }
 }

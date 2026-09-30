@@ -4,11 +4,12 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Character Sheet</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
         <link rel="icon" href="favicon.ico" />
-        <link rel="stylesheet" href="charactersheet.css" />
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-            rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="charactersheet.css">
     </head>
     
     <body>
@@ -26,15 +27,12 @@
         <main>
             <h1>Character Sheet</h1>
             <div class="portrait_hp">
-                <section class="hp_ac">
-                    <div class="hp">
+                <section id="hp_ac">
+                    <div class="hp_row">
                         <label for="hp">HP: </label>
                         <input id="hp" type="number" value="24" min="0" max="30">
                     </div>
-
-                    <div class="ac">
-                        <strong>AC: 17</strong>
-                    </div>
+                    <strong id="ac">AC: 17</strong>
                 </section>
 
                 <section class="portrait_section">
@@ -43,18 +41,18 @@
             </div>
 
             <div class="edit_button">
-                <button type="button">Edit</button>
+                <button class="btn btn-danger" type="button">Edit</button>
             </div>
 
             <div class="ability_checks">
                 <h2>Ability Checks</h2>
                 <div class="ability_buttons">
-                    <button type="button">Strength</button>
-                    <button type="button">Dexterity</button>
-                    <button type="button">Constitution</button>
-                    <button type="button">Intelligence</button>
-                    <button type="button">Wisdom</button>
-                    <button type="button">Charisma</button>
+                    <button class="btn btn-danger" type="button">Strength</button>
+                    <button class="btn btn-danger" type="button">Dexterity</button>
+                    <button class="btn btn-danger" type="button">Constitution</button>
+                    <button class="btn btn-danger" type="button">Intelligence</button>
+                    <button class="btn btn-danger" type="button">Wisdom</button>
+                    <button class="btn btn-danger" type="button">Charisma</button>
                 </div>
             </div>
 
@@ -62,21 +60,21 @@
                 <section class="actions">
                     <h2>Actions</h2>
                     <div class="action_buttons">
-                        <button type="button">Attack Roll</button>
-                        <button type="button">Spell Roll</button>
-                        <button type="button">Bonus Action</button>
+                        <button class="btn btn-danger" type="button">Attack Roll</button>
+                        <button class="btn btn-danger" type="button">Spell Roll</button>
+                        <button class="btn btn-danger" type="button">Bonus Action</button>
                     </div>
                 </section>
 
                 <section class="saving_throws">
                     <h2>Saving Throws</h2>
                     <div class="saving_buttons">
-                        <button type="button">STR</button>
-                        <button type="button">DEX</button>
-                        <button type="button">CON</button>
-                        <button type="button">INT</button>
-                        <button type="button">WIS</button>
-                        <button type="button">CHA</button>
+                        <button class="btn btn-danger" type="button">STR</button>
+                        <button class="btn btn-danger" type="button">DEX</button>
+                        <button class="btn btn-danger" type="button">CON</button>
+                        <button class="btn btn-danger" type="button">INT</button>
+                        <button class="btn btn-danger" type="button">WIS</button>
+                        <button class="btn btn-danger" type="button">CHA</button>
                     </div>
                 </section>
 
@@ -84,26 +82,26 @@
                     <h2>Skill Checks</h2>
                     <div class="skill_buttons">
                         <div class="skill_buttons1">
-                            <button type="button">Acrobatics</button>
-                            <button type="button">Animal Handling</button>
-                            <button type="button">Arcana</button>
-                            <button type="button">Athletics</button>
-                            <button type="button">Deception</button>
-                            <button type="button">History</button>
-                            <button type="button">Insight</button>
-                            <button type="button">Intimidation</button>
-                            <button type="button">Investigation</button>
+                            <button class="btn btn-danger" type="button">Acrobatics</button>
+                            <button class="btn btn-danger" type="button">Animal Handling</button>
+                            <button class="btn btn-danger" type="button">Arcana</button>
+                            <button class="btn btn-danger" type="button">Athletics</button>
+                            <button class="btn btn-danger" type="button">Deception</button>
+                            <button class="btn btn-danger" type="button">History</button>
+                            <button class="btn btn-danger" type="button">Insight</button>
+                            <button class="btn btn-danger" type="button">Intimidation</button>
+                            <button class="btn btn-danger" type="button">Investigation</button>
                         </div>
                         <div class="skill_buttons2">
-                            <button type="button">Medicine</button>
-                            <button type="button">Nature</button>
-                            <button type="button">Perception</button>
-                            <button type="button">Performance</button>
-                            <button type="button">Persuasion</button>
-                            <button type="button">Religion</button>
-                            <button type="button">Sleight of Hands</button>
-                            <button type="button">Stealth</button>
-                            <button type="button">Survival</button>
+                            <button class="btn btn-danger" type="button">Medicine</button>
+                            <button class="btn btn-danger" type="button">Nature</button>
+                            <button class="btn btn-danger" type="button">Perception</button>
+                            <button class="btn btn-danger" type="button">Performance</button>
+                            <button class="btn btn-danger" type="button">Persuasion</button>
+                            <button class="btn btn-danger" type="button">Religion</button>
+                            <button class="btn btn-danger" type="button">Sleight of Hands</button>
+                            <button class="btn btn-danger" type="button">Stealth</button>
+                            <button class="btn btn-danger" type="button">Survival</button>
                         </div> 
                     </div>
                 </section>

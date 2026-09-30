@@ -16,28 +16,31 @@ body {
     background-image:
         radial-gradient(ellipse at top, #514333, transparent 65%);
     color: #f0e5cc;
+    font-family: "Cinzel", Georgia, serif;
     margin: 0;
 }
 
 header {
     display: flex;
-    flex-direction: row;
-    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
-    border-bottom: solid rgb(104, 1, 1);;
-    min-width: 800px;
-    box-sizing: border-box;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.5rem;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(rgb(100, 76, 76), rgb(48, 28, 28));
+    border-bottom: 2px solid rgb(104, 1, 1);
 }
 
 header h1 {
-    font-size: 24px
+    font-size: 25px
 }
 
 header nav menu {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     gap: 1rem;
     list-style: none;
-    font-size: 20px;
+    margin: 0;
+    padding: 0;
 }
 
 header nav a,
@@ -68,6 +71,7 @@ footer {
 
 footer hr {
     border: 0;
+    margin: 0;
     border-top: solid rgb(104, 1, 1);
 }
 
@@ -76,6 +80,8 @@ footer hr {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    box-sizing: border-box;
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
 }
 
 .footer_content a{
@@ -85,4 +91,16 @@ footer hr {
 
 .footer_content a:hover {
     color: #c49a58;
+}
+
+@media (max-height: 600px) {
+  header {
+    display: none;
+  }
+  footer {
+    display: none;
+  }
+  main {
+    flex: 1 100vh;
+  }
 }
