@@ -8,6 +8,7 @@ main {
     flex: 1;
     color: #f0e5cc;
     font-family: "Cinzel", Georgia, serif;
+    margin: 10px;
 }
 body {
     background-color: #24221e;
@@ -75,6 +76,14 @@ main h1 {
     font-size: 36px;
 }
 
+.hp input {
+    font-family: "Cinzel", Georgia, serif;
+    background: none;
+    border: none;
+    color: #f0e5cc;
+    font-size: 36px;
+}
+
 .ac strong {
     font-size: 36px;
 }
@@ -115,7 +124,6 @@ main h1 {
 .actions {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
 }
 
 .action_buttons {
@@ -124,13 +132,16 @@ main h1 {
     flex-wrap: wrap;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 0.5rem;
     box-sizing: border-box;
     padding: 5px;
 }
 
 .action_buttons button {
-    width: 50px;
+    width: 9rem;
+    box-sizing: border-box;
+    white-space: normal;
 }
 
 .saving_throws {
@@ -193,6 +204,7 @@ main h1 {
 .api_placeholder_text {
     background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
     border: solid rgb(104, 1, 1);
+    padding: 0.75rem;
 }
 
 .real_time_actions {
@@ -204,6 +216,18 @@ main h1 {
 .real_time_actions_text {
     background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
     border: solid rgb(104, 1, 1);
+    padding: 0.75rem;
+}
+
+button {
+    color: #f0e5cc;
+    border: 5px solid rgb(104, 1, 1);
+    background: linear-gradient( #b87064, #6e3e32);
+    font-family: "Cinzel", Georgia, serif;
+}
+
+button:hover {
+    color: #c49a58;
 }
 
 footer {
