@@ -67,7 +67,7 @@ header p {
 }
 
 .login_section {
-    padding-top: 300px;
+    padding-top: clamp(2rem, 12vh, 8rem);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -79,9 +79,15 @@ header p {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    width: min(100%, 28rem)
 }
 
 .email {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+    padding: 0.5rem;
     color: #f0e5cc;
     border: 5px solid rgb(104, 1, 1);
     background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
@@ -89,6 +95,11 @@ header p {
 }
 
 .password {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+    padding: 0.5rem;
     color: #f0e5cc;
     border: 5px solid rgb(104, 1, 1);
     background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
@@ -104,6 +115,9 @@ header p {
 }
 
 .login_section input {
+     flex: 1;
+    min-width: 0;
+    width: 0;
     color: #f0e5cc;
     font-family: "Cinzel", Georgia, serif;
     font-size: 30px;
