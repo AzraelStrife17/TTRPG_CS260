@@ -4,9 +4,9 @@
   "description": "[My Notes](notes.md)",
   "main": "index.js",
   "dependencies": {
-    "bootstrap": "^5.3.8"
+    "bootstrap": "^5.3.8",
+    "react-bootstrap": "^2.10.10"
   },
-  "devDependencies": {},
   "scripts": {
     "dev": "vite",
     "build": "vite build",

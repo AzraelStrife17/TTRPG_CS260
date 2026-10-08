@@ -1,0 +1,287 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+    flex: 1;
+    color: #f0e5cc;
+    font-family: "Cinzel", Georgia, serif;
+    margin: 10px;
+}
+body {
+    background-color: #24221e;
+    background-image:
+        radial-gradient(ellipse at top, #514333, transparent 65%);
+    color: #f0e5cc;
+    font-family: "Cinzel", Georgia, serif;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.5rem;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(rgb(100, 76, 76), rgb(48, 28, 28));
+    border-bottom: 2px solid rgb(104, 1, 1);
+}
+
+header h1 {
+    font-size: 25px
+}
+
+header nav menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+header nav a,
+header nav a:visited {
+  color: #f0e5cc;
+  text-decoration: none;
+}
+
+header nav a:hover {
+  color: #c49a58;
+}
+
+header p {
+    display: flex;
+    margin-left: auto;
+}
+
+main h1 {
+    display: flex;
+    justify-content: center;
+}
+
+.portrait_hp {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    justify-content: center;
+    gap: 10px
+}
+
+.portrait {
+    border: solid rgb(104, 1, 1);
+    width: 200px;
+    height: 300px;
+}
+
+#hp_ac {
+    display: flex;
+    flex-direction: column;
+}
+
+#hp {
+    font-family: "Cinzel", Georgia, serif;
+    background: none;
+    border: none;
+    color: #f0e5cc;
+    font-size: 25px;
+}
+
+label[for="hp"]{
+    font-size: 25px;
+}
+
+.hp_row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#ac {
+    font-size: 25px;
+}
+
+.ability_checks {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.ability_checks h2 {
+    text-align: center;
+}
+
+.ability_buttons {
+    display: flex;
+    flex-wrap: wrap;
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+    border: solid rgb(104, 1, 1);
+    justify-content: space-between; 
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.ability_buttons button {
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+}
+
+.sections {
+    padding-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: 1rem;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+}
+
+.action_buttons {
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+    border: solid rgb(104, 1, 1);
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+.action_buttons button {
+    width: 9rem;
+    box-sizing: border-box;
+    white-space: normal;
+}
+
+.btn-danger {
+    background: linear-gradient( #b87064, #6e3e32);
+    border-color: #680101;
+    color: #f0e5cc;
+    border-width: 4px;
+}
+
+.btn-danger:hover {
+    color: #c49a58;
+}
+
+.saving_throws {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.saving_buttons {
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+    border: solid rgb(104, 1, 1);
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.skill_checks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.skill_buttons {
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+    border: solid rgb(104, 1, 1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.skill_buttons1{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-sizing: border-box;
+    padding: 5px;
+    flex: 1 1 7rem;
+}
+
+.skill_buttons2{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-sizing: border-box;
+    padding: 5px;
+    flex: 1 1 7rem;
+}
+
+.api_placeholder {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.api_placeholder_text {
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+    border: solid rgb(104, 1, 1);
+    padding: 0.75rem;
+}
+
+.real_time_actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.real_time_actions_text {
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+    border: solid rgb(104, 1, 1);
+    padding: 0.75rem;
+}
+
+footer {
+    padding-top: 20px;
+    margin-top: auto;
+}
+
+footer hr {
+    border: 0;
+    margin: 0;
+    border-top: solid rgb(104, 1, 1);
+}
+
+.footer_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    background: linear-gradient( rgb(100, 76, 76), rgb(48, 28, 28));
+}
+
+.footer_content a{
+    color: #f0e5cc;
+    text-decoration: none;
+}
+
+.footer_content a:hover {
+    color: #c49a58;
+}
+
+@media (max-height: 600px) {
+  header {
+    display: none;
+  }
+  footer {
+    display: none;
+  }
+  main {
+    flex: 1 100vh;
+  }
+}
