@@ -3,6 +3,7 @@ import { NavLink, Route, Routes, useLocation } from 'react-router-dom';
 import Dashboard from './pages/dashboard.jsx';
 import CharacterSheet from './pages/charactersheet.jsx';
 import About from './pages/about.jsx';
+import './app.css';
 
 export default function App() {
   const { pathname } = useLocation();
