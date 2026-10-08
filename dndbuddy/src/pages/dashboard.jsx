@@ -13,7 +13,7 @@ export default function Dashboard() {
                 <tr>
                   <th>Name</th>
                   <th>Level</th>
-                  <th>className</th>
+                  <th>Class</th>
                 </tr>
               </thead>
 
