@@ -1,9 +1,9 @@
 import { NavLink, Route, Routes, useLocation } from 'react-router-dom';
 
-import Dashboard from './pages/dashboard.jsx';
-import CharacterSheet from './pages/charactersheet.jsx';
-import About from './pages/about.jsx';
-import Login from './pages/login.jsx';
+import Dashboard from './dashboard/dashboard.jsx';
+import CharacterSheet from './charactersheet/charactersheet.jsx';
+import About from './about/about.jsx';
+import Login from './login/login.jsx';
 import './app.css';
 
 export default function App() {
