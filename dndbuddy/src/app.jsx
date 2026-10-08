@@ -1,8 +1,7 @@
 import { NavLink, Route, Routes, useLocation } from 'react-router-dom';
 
-import Home from './pages/home.jsx';
 import Dashboard from './pages/dashboard.jsx';
-import CharacterSheet from './pages/characterSheet.jsx';
+import CharacterSheet from './pages/charactersheet.jsx';
 import About from './pages/about.jsx';
 
 export default function App() {
@@ -17,7 +16,7 @@ export default function App() {
     <div className="page">
       <header>
         <h1>
-          D&amp;D Buddy<sup>&reg;</sup>
+          D&D Buddy<sup>&reg;</sup>
         </h1>
 
         <nav>
