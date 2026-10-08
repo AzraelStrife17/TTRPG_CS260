@@ -1,0 +1,27 @@
+{
+  "name": "ttrpg_cs260",
+  "version": "1.0.0",
+  "description": "[My Notes](notes.md)",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^5.3.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AzraelStrife17/TTRPG_CS260.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AzraelStrife17/TTRPG_CS260/issues"
+  },
+  "homepage": "https://github.com/AzraelStrife17/TTRPG_CS260#readme"
+}
