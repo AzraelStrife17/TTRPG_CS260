@@ -3,6 +3,7 @@ import { NavLink, Route, Routes, useLocation } from 'react-router-dom';
 import Dashboard from './pages/dashboard.jsx';
 import CharacterSheet from './pages/charactersheet.jsx';
 import About from './pages/about.jsx';
+import Login from './pages/login.jsx'
 import './app.css';
 
 export default function App() {
@@ -22,7 +23,6 @@ export default function App() {
 
         <nav>
           <menu>
-            <li><NavLink to="/" end>Home</NavLink></li>
             <li><NavLink to="/dashboard">Dashboard</NavLink></li>
             <li><NavLink to="/about">About</NavLink></li>
           </menu>
@@ -32,7 +32,7 @@ export default function App() {
       </header>
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/charactersheet" element={<CharacterSheet />} />
         <Route path="/about" element={<About />} />

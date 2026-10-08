@@ -39,7 +39,7 @@ export default function Dashboard() {
             </table>
           </div>
 
-          <Link classNameName="btn btn-danger" to="/charactersheet">
+          <Link className="btn btn-danger" to="/charactersheet">
             Create Character
           </Link>
         </section>
@@ -55,7 +55,7 @@ export default function Dashboard() {
               <option value="dr_tofu">Dr. Tofu</option>
               <option value="pyrois">Pyrois</option>
             </select>
-            <button classNameName="btn btn-danger" type="button">Join</button>
+            <button className="btn btn-danger" type="button">Join</button>
           </form>
 
           <h2>Create Campaign Code</h2>
