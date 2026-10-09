@@ -23,6 +23,7 @@ export default function App() {
 
         <nav>
           <menu>
+            <li><NavLink to="/login">Login</NavLink></li>
             <li><NavLink to="/dashboard">Dashboard</NavLink></li>
             <li><NavLink to="/about">About</NavLink></li>
           </menu>
@@ -32,7 +33,7 @@ export default function App() {
       </header>
 
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/Login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/charactersheet" element={<CharacterSheet />} />
         <Route path="/about" element={<About />} />
