@@ -101,7 +101,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [X] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [X] **Bundled using Vite** - I did not complete this part of the deliverable.
+- [X] **Bundled using Vite** -completed
 - [X] **Components** - I have 5 components: app, login, dashboard, charactersheet, and about 
 - [X] **Router** - Routing between login, dashboard, about and charactersheet
 
