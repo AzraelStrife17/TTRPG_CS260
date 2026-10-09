@@ -101,7 +101,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [X] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [X] **Bundled using Vite** -completed
+- [X] **Bundled using Vite** -completed, still some parts will need to be fleshed out further such as the buttons in charactersheet.jsx which will be more fleshed out once work beings in react part 2
 - [X] **Components** - I have 5 components: app, login, dashboard, charactersheet, and about 
 - [X] **Router** - Routing between login, dashboard, about and charactersheet
 
