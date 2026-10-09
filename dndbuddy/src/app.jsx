@@ -33,6 +33,7 @@ export default function App() {
       </header>
 
       <Routes>
+        <Route path='/' element={<Login />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/charactersheet" element={<CharacterSheet />} />
