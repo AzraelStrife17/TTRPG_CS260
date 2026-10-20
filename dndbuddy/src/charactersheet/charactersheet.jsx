@@ -1,8 +1,42 @@
 import './charactersheet.css';
 import { useState } from 'react';
 
+function  getAbilityModifier(score){
+    return Math.floor((score - 10)/2)
+}
+
+function rollD20(ability, score, setRecentRolls){
+    const modifier = getAbilityModifier(score)
+    const dieRoll = Math.floor(Math.random() * 20) + 1;
+    const total = dieRoll + modifier;
+
+    setRecentRolls((currentRolls) => [
+            {
+        id: crypto.randomUUID(),
+        ability,
+        dieRoll,
+        modifier,
+        total,
+        },
+        ... currentRolls
+    ].slice(0, 5));
+
+    return total
+};
+
 export default function Charactersheet() {
     const [hp, setHp] = useState(24);
+
+    const [abilities, setAbilities] = useState({
+        strength: 15,
+        dexterity: 14,
+        constitution: 13,
+        intelligence: 12,
+        wisdom: 10,
+        charisma: 8,
+    });
+
+    const [recentRolls, setRecentRolls] = useState([])
 
     return (
         <main>
@@ -35,12 +69,43 @@ export default function Charactersheet() {
             <div className="ability_checks">
                 <h2>Ability Checks</h2>
                 <div className="ability_buttons">
-                    <button className="btn btn-danger" type="button">Strength</button>
-                    <button className="btn btn-danger" type="button">Dexterity</button>
-                    <button className="btn btn-danger" type="button">Constitution</button>
-                    <button className="btn btn-danger" type="button">Intelligence</button>
-                    <button className="btn btn-danger" type="button">Wisdom</button>
-                    <button className="btn btn-danger" type="button">Charisma</button>
+                    <button 
+                        className="btn btn-danger" 
+                        type="button"
+                        onClick={() => rollD20('strength', abilities.strength, setRecentRolls)}
+                    >
+                        Strength
+                    </button>
+                    <button 
+                        className="btn btn-danger" 
+                        type="button"
+                        onClick={() => rollD20('dexterity', abilities.dexterity, setRecentRolls)}
+                        >Dexterity
+                    </button>
+                    <button 
+                        className="btn btn-danger" 
+                        type="button"
+                        onClick={() => rollD20('constitution', abilities.constitution, setRecentRolls)}
+                        >Constitution
+                    </button>
+                    <button 
+                        className="btn btn-danger" 
+                        type="button"
+                        onClick={() => rollD20('intelligence', abilities.intelligence, setRecentRolls)}
+                        >Intelligence
+                    </button>
+                    <button 
+                        className="btn btn-danger" 
+                        type="button"
+                        onClick={() => rollD20('wisdom', abilities.wisdom, setRecentRolls)}
+                        >Wisdom
+                    </button>
+                    <button 
+                        className="btn btn-danger" 
+                        type="button"
+                        onClick={() => rollD20('charisma', abilities.charisma, setRecentRolls)}
+                        >Charisma
+                    </button>
                 </div>
             </div>
 
@@ -110,8 +175,13 @@ export default function Charactersheet() {
                     <div className="real_time_actions_text">
                         <p>Live Rolls displayed here (Websocket Placeholder)</p>
                         <ul>
-                            <li>Dr.Tofu rolled a 20 on wisdom</li>
-                            <li>Holy Mackerel rolled 1 on intelligence</li>
+                            {recentRolls.map((roll) => (
+                                <li key={roll.id}>
+                                    {roll.ability}: d20 ({roll.dieRoll}){' '}
+                                    {roll.modifier >= 0 ? '+' : '-'} {Math.abs(roll.modifier) + ' = '}
+                                    {roll.dieRoll + roll.modifier}
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </section>
