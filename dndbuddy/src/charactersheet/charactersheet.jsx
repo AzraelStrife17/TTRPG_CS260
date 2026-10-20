@@ -5,10 +5,23 @@ function  getAbilityModifier(score){
     return Math.floor((score - 10)/2)
 }
 
-function rollD20(ability, score, setRecentRolls){
+function getProficiency(proficiency){
+    return proficiency
+}
+
+function rollD20(ability, score, setRecentRolls, proficiency){
     const modifier = getAbilityModifier(score)
     const dieRoll = Math.floor(Math.random() * 20) + 1;
-    const total = dieRoll + modifier;
+    const proBonus = getProficiency(proficiency);
+    let total = 0
+
+    if (proficiency > 0){
+        total = dieRoll + modifier + proBonus;
+    }
+
+    else{
+        total = dieRoll + modifier;
+    }
 
     setRecentRolls((currentRolls) => [
             {
@@ -16,6 +29,7 @@ function rollD20(ability, score, setRecentRolls){
         ability,
         dieRoll,
         modifier,
+        proBonus,
         total,
         },
         ... currentRolls
@@ -34,6 +48,16 @@ export default function Charactersheet() {
         intelligence: 12,
         wisdom: 10,
         charisma: 8,
+    });
+
+    const [savePro, setSavePro] = useState({
+        strength: 1,
+        dexterity: 0,
+        constitution: 0,
+        intelligence: 0,
+        wisdom: 0,
+        charisma: 1,
+
     });
 
     const [recentRolls, setRecentRolls] = useState([])
@@ -72,37 +96,37 @@ export default function Charactersheet() {
                     <button 
                         className="btn btn-danger" 
                         type="button"
-                        onClick={() => rollD20('strength', abilities.strength, setRecentRolls)}
+                        onClick={() => rollD20('strength', abilities.strength, setRecentRolls, 0)}
                     >Strength
                     </button>
                     <button 
                         className="btn btn-danger" 
                         type="button"
-                        onClick={() => rollD20('dexterity', abilities.dexterity, setRecentRolls)}
+                        onClick={() => rollD20('dexterity', abilities.dexterity, setRecentRolls, 0)}
                         >Dexterity
                     </button>
                     <button 
                         className="btn btn-danger" 
                         type="button"
-                        onClick={() => rollD20('constitution', abilities.constitution, setRecentRolls)}
+                        onClick={() => rollD20('constitution', abilities.constitution, setRecentRolls, 0)}
                         >Constitution
                     </button>
                     <button 
                         className="btn btn-danger" 
                         type="button"
-                        onClick={() => rollD20('intelligence', abilities.intelligence, setRecentRolls)}
+                        onClick={() => rollD20('intelligence', abilities.intelligence, setRecentRolls, 0)}
                         >Intelligence
                     </button>
                     <button 
                         className="btn btn-danger" 
                         type="button"
-                        onClick={() => rollD20('wisdom', abilities.wisdom, setRecentRolls)}
+                        onClick={() => rollD20('wisdom', abilities.wisdom, setRecentRolls, 0)}
                         >Wisdom
                     </button>
                     <button 
                         className="btn btn-danger" 
                         type="button"
-                        onClick={() => rollD20('charisma', abilities.charisma, setRecentRolls)}
+                        onClick={() => rollD20('charisma', abilities.charisma, setRecentRolls, 0)}
                         >Charisma
                     </button>
                 </div>
@@ -124,37 +148,37 @@ export default function Charactersheet() {
                         <button 
                             className="btn btn-danger" 
                             type="button"
-                            onClick={() => rollD20('str saving throw', abilities.strength, setRecentRolls)}
+                            onClick={() => rollD20('str saving throw', abilities.strength, setRecentRolls, savePro.strength)}
                             >STR
                         </button>
                         <button 
                             className="btn btn-danger" 
                             type="button"
-                            onClick={() => rollD20('dex savaing throw', abilities.dexterity, setRecentRolls)}
+                            onClick={() => rollD20('dex savaing throw', abilities.dexterity, setRecentRolls, savePro.dexterity)}
                             >DEX
                         </button>
                         <button 
                             className="btn btn-danger" 
                             type="button"
-                            onClick={() => rollD20('con saving throw', abilities.constitution, setRecentRolls)}
+                            onClick={() => rollD20('con saving throw', abilities.constitution, setRecentRolls, savePro.constitution)}
                             >CON
                         </button>
                         <button 
                             className="btn btn-danger" 
                             type="button"
-                            onClick={() => rollD20('int saving throw', abilities.intelligence, setRecentRolls)}
+                            onClick={() => rollD20('int saving throw', abilities.intelligence, setRecentRolls, savePro.intelligence)}
                             >INT
                         </button>
                         <button 
                             className="btn btn-danger" 
                             type="button"
-                            onClick={() => rollD20('wis saving throw', abilities.wisdom, setRecentRolls)}
+                            onClick={() => rollD20('wis saving throw', abilities.wisdom, setRecentRolls, savePro.wisdom)}
                             >WIS
                         </button>
                         <button 
                             className="btn btn-danger" 
                             type="button"
-                            onClick={() => rollD20('cha saving throw', abilities.charisma, setRecentRolls)}
+                            onClick={() => rollD20('cha saving throw', abilities.charisma, setRecentRolls, savePro.charisma)}
                             >CHA
                         </button>
                     </div>
@@ -207,7 +231,9 @@ export default function Charactersheet() {
                             {recentRolls.map((roll) => (
                                 <li key={roll.id}>
                                     {roll.ability}: d20 ({roll.dieRoll}){' '}
-                                    {roll.modifier >= 0 ? '+' : '-'} {Math.abs(roll.modifier) + ' = '}
+                                    {roll.modifier >= 0 ? '+' : '-'}{' '}
+                                    {roll.proBonus > 0 && <>{roll.proBonus} {' '} +</>}{' '}
+                                    {Math.abs(roll.modifier) + ' = '}
                                     {roll.total}
                                 </li>
                             ))}
