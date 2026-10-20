@@ -73,8 +73,7 @@ export default function Charactersheet() {
                         className="btn btn-danger" 
                         type="button"
                         onClick={() => rollD20('strength', abilities.strength, setRecentRolls)}
-                    >
-                        Strength
+                    >Strength
                     </button>
                     <button 
                         className="btn btn-danger" 
@@ -122,12 +121,42 @@ export default function Charactersheet() {
                 <section className="saving_throws">
                     <h2>Saving Throws</h2>
                     <div className="saving_buttons">
-                        <button className="btn btn-danger" type="button">STR</button>
-                        <button className="btn btn-danger" type="button">DEX</button>
-                        <button className="btn btn-danger" type="button">CON</button>
-                        <button className="btn btn-danger" type="button">INT</button>
-                        <button className="btn btn-danger" type="button">WIS</button>
-                        <button className="btn btn-danger" type="button">CHA</button>
+                        <button 
+                            className="btn btn-danger" 
+                            type="button"
+                            onClick={() => rollD20('str saving throw', abilities.strength, setRecentRolls)}
+                            >STR
+                        </button>
+                        <button 
+                            className="btn btn-danger" 
+                            type="button"
+                            onClick={() => rollD20('dex savaing throw', abilities.dexterity, setRecentRolls)}
+                            >DEX
+                        </button>
+                        <button 
+                            className="btn btn-danger" 
+                            type="button"
+                            onClick={() => rollD20('con saving throw', abilities.constitution, setRecentRolls)}
+                            >CON
+                        </button>
+                        <button 
+                            className="btn btn-danger" 
+                            type="button"
+                            onClick={() => rollD20('int saving throw', abilities.intelligence, setRecentRolls)}
+                            >INT
+                        </button>
+                        <button 
+                            className="btn btn-danger" 
+                            type="button"
+                            onClick={() => rollD20('wis saving throw', abilities.wisdom, setRecentRolls)}
+                            >WIS
+                        </button>
+                        <button 
+                            className="btn btn-danger" 
+                            type="button"
+                            onClick={() => rollD20('cha saving throw', abilities.charisma, setRecentRolls)}
+                            >CHA
+                        </button>
                     </div>
                 </section>
 
@@ -179,7 +208,7 @@ export default function Charactersheet() {
                                 <li key={roll.id}>
                                     {roll.ability}: d20 ({roll.dieRoll}){' '}
                                     {roll.modifier >= 0 ? '+' : '-'} {Math.abs(roll.modifier) + ' = '}
-                                    {roll.dieRoll + roll.modifier}
+                                    {roll.total}
                                 </li>
                             ))}
                         </ul>
