@@ -60,6 +60,27 @@ export default function Charactersheet() {
 
     });
 
+    const [skillPro, setSkillPro] = useState({
+        acrobatics: 0,
+        animalHandling: 0,
+        arcana: 0,
+        athletics: 0,
+        deception: 0,
+        history: 0,
+        insight: 0,
+        intimidation: 0,
+        investigation: 0,
+        medicine: 0,
+        nature: 0,
+        perception: 0,
+        performance: 1,
+        persuasion: 1,
+        religion: 0,
+        sleightHands: 0,
+        stealth: 0,
+        survival: 0,
+    });
+
     const [recentRolls, setRecentRolls] = useState([])
 
     return (
@@ -188,26 +209,116 @@ export default function Charactersheet() {
                     <h2>Skill Checks</h2>
                     <div className="skill_buttons">
                         <div className="skill_buttons1">
-                            <button className="btn btn-danger" type="button">Acrobatics</button>
-                            <button className="btn btn-danger" type="button">Animal Handling</button>
-                            <button className="btn btn-danger" type="button">Arcana</button>
-                            <button className="btn btn-danger" type="button">Athletics</button>
-                            <button className="btn btn-danger" type="button">Deception</button>
-                            <button className="btn btn-danger" type="button">History</button>
-                            <button className="btn btn-danger" type="button">Insight</button>
-                            <button className="btn btn-danger" type="button">Intimidation</button>
-                            <button className="btn btn-danger" type="button">Investigation</button>
+                            <button 
+                                className="btn btn-danger" 
+                                type="button"
+                                onClick={() => rollD20('acrobatics', abilities.dexterity, setRecentRolls, skillPro.acrobatics)}
+                                >Acrobatics
+                            </button>
+                            <button 
+                                className="btn btn-danger" 
+                                type="button"
+                                onClick={() => rollD20('animal handling', abilities.wisdom, setRecentRolls, skillPro.animalHandling)}
+                                >Animal Handling
+                            </button>
+                            <button 
+                                className="btn btn-danger" 
+                                type="button"
+                                onClick={() => rollD20('arcana', abilities.intelligence, setRecentRolls, skillPro.arcana)}
+                                >Arcana
+                            </button>
+                            <button 
+                                className="btn btn-danger" 
+                                type="button"
+                                onClick={() => rollD20('athletics', abilities.strength, setRecentRolls, skillPro.athletics)}
+                                >Athletics
+                            </button>
+                            <button 
+                                className="btn btn-danger" 
+                                type="button"
+                                onClick={() => rollD20('deception', abilities.charisma, setRecentRolls, skillPro.deception)}
+                                >Deception
+                            </button>
+                            <button 
+                                className="btn btn-danger" 
+                                type="button"
+                                onClick={() => rollD20('history', abilities.wisdom, setRecentRolls, skillPro.history)}
+                                >History
+                            </button>
+                            <button 
+                                className="btn btn-danger" 
+                                type="button"
+                                onClick={() => rollD20('insight', abilities.intelligence, setRecentRolls, skillPro.insight)}
+                                >Insight
+                            </button>
+                            <button 
+                                className="btn btn-danger" 
+                                type="button"
+                                onClick={() => rollD20('intimidation', abilities.charisma, setRecentRolls, skillPro.intimidation)}
+                                >Intimidation
+                            </button>
+                            <button 
+                                className="btn btn-danger" 
+                                type="button"
+                                onClick={() => rollD20('investigation', abilities.intelligence, setRecentRolls, skillPro.investigation)}
+                                >Investigation
+                            </button>
                         </div>
                         <div className="skill_buttons2">
-                            <button className="btn btn-danger" type="button">Medicine</button>
-                            <button className="btn btn-danger" type="button">Nature</button>
-                            <button className="btn btn-danger" type="button">Perception</button>
-                            <button className="btn btn-danger" type="button">Performance</button>
-                            <button className="btn btn-danger" type="button">Persuasion</button>
-                            <button className="btn btn-danger" type="button">Religion</button>
-                            <button className="btn btn-danger" type="button">Sleight of Hands</button>
-                            <button className="btn btn-danger" type="button">Stealth</button>
-                            <button className="btn btn-danger" type="button">Survival</button>
+                            <button 
+                                className="btn btn-danger" 
+                                type="button"
+                                onClick={() => rollD20('medicine', abilities.intelligence, setRecentRolls, skillPro.medicine)}
+                                >Medicine
+                            </button>
+                            <button 
+                                className="btn btn-danger" 
+                                type="button"
+                                onClick={() => rollD20('nature', abilities.wisdom, setRecentRolls, skillPro.nature)}
+                                >Nature
+                            </button>
+                            <button 
+                                className="btn btn-danger" 
+                                type="button"
+                                onClick={() => rollD20('perception', abilities.intelligence, setRecentRolls, skillPro.perception)}
+                                >Perception
+                            </button>
+                            <button 
+                                className="btn btn-danger" 
+                                type="button"
+                                onClick={() => rollD20('performance', abilities.charisma, setRecentRolls, skillPro.performance)}
+                                >Performance
+                            </button>
+                            <button 
+                                className="btn btn-danger" 
+                                type="button"
+                                onClick={() => rollD20('persuasion', abilities.charisma, setRecentRolls, skillPro.persuasion)}
+                                >Persuasion
+                            </button>
+                            <button 
+                                className="btn btn-danger" 
+                                type="button"
+                                onClick={() => rollD20('religion', abilities.wisdom, setRecentRolls, skillPro.religion)}
+                                >Religion
+                            </button>
+                            <button 
+                                className="btn btn-danger" 
+                                type="button"
+                                onClick={() => rollD20('sleight of hands', abilities.dexterity, setRecentRolls, skillPro.sleightHands)}
+                                >Sleight of Hands
+                            </button>
+                            <button 
+                                className="btn btn-danger" 
+                                type="button"
+                                onClick={() => rollD20('stealth', abilities.dexterity, setRecentRolls, skillPro.stealth)}
+                                >Stealth
+                            </button>
+                            <button 
+                                className="btn btn-danger" 
+                                type="button"
+                                onClick={() => rollD20('survival', abilities.wisdom, setRecentRolls, skillPro.survival)}
+                                >Survival
+                            </button>
                         </div>
                     </div>
                 </section>
