@@ -46,6 +46,62 @@ function rollD20(ability, score, setRecentRolls, proficiency, lvl){
     return total
 };
 
+function mockAttack(setRecentRolls, strengthScore) {
+  const dieRoll = Math.floor(Math.random() * 20) + 1;
+  const modifier = Math.floor((strengthScore - 10) / 2);
+  const total = dieRoll + modifier;
+
+  setRecentRolls((currentRolls) => [
+    {
+      id: crypto.randomUUID(),
+      ability: 'mock greatsword',
+      dieRoll,
+      modifier,
+      proBonus: 0,
+      total,
+    },
+    ...currentRolls,
+  ].slice(0, 5));
+}
+
+function mockSpell(setRecentRolls, intelligenceScore){
+    const dieRoll = Math.floor(Math.random() * 20) + 1;
+    const modifier = Math.floor((intelligenceScore - 10) / 2);
+    const total = dieRoll + modifier;
+
+    setRecentRolls((currentRolls) => [
+    {
+      id: crypto.randomUUID(),
+      ability: 'mock spell',
+      dieRoll,
+      modifier,
+      proBonus: 0,
+      total,
+    },
+    ...currentRolls,
+    ].slice(0, 5));
+
+}
+
+function mockBonus(setRecentRolls, intelligenceScore){
+    const dieRoll = Math.floor(Math.random() * 20) + 1;
+    const modifier = Math.floor((intelligenceScore - 10) / 2);
+    const total = dieRoll + modifier;
+
+    setRecentRolls((currentRolls) => [
+    {
+      id: crypto.randomUUID(),
+      ability: 'mock bonus action',
+      dieRoll,
+      modifier,
+      proBonus: 0,
+      total,
+    },
+    ...currentRolls,
+    ].slice(0, 5));
+
+}
+
 export default function Charactersheet() {
     const [hp, setHp] = useState(24);
     const [lvl, setLvl] = useState(1)
@@ -177,9 +233,24 @@ export default function Charactersheet() {
                 <section className="actions">
                     <h2>Actions</h2>
                     <div className="action_buttons">
-                        <button className="btn btn-danger" type="button">Attack Roll</button>
-                        <button className="btn btn-danger" type="button">Spell Roll</button>
-                        <button className="btn btn-danger" type="button">Bonus Action</button>
+                        <button 
+                            className="btn btn-danger" 
+                            type="button"
+                            onClick={() => mockAttack(setRecentRolls, abilities.strength)}
+                            >Attack Roll
+                        </button>
+                        <button 
+                            className="btn btn-danger" 
+                            type="button"
+                            onClick={() => mockSpell(setRecentRolls, abilities.intelligence)}
+                            >Spell Roll
+                        </button>
+                        <button 
+                            className="btn btn-danger" 
+                            type="button"
+                            onClick={() => mockBonus(setRecentRolls, abilities.intelligence)}
+                            >Bonus Action
+                        </button>
                     </div>
                 </section>
 
