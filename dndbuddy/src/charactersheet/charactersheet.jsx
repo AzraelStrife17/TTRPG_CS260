@@ -5,14 +5,22 @@ function  getAbilityModifier(score){
     return Math.floor((score - 10)/2)
 }
 
-function getProficiency(proficiency){
-    return proficiency
+function getProficiency(proficiency, lvl){
+    if (proficiency <= 0) {
+        return 0;
+    }
+
+    if (lvl <= 4) return 2;
+    if (lvl <= 8) return 3;
+    if (lvl <= 12) return 4;
+    if (lvl <= 16) return 5;
+    return 6;
 }
 
-function rollD20(ability, score, setRecentRolls, proficiency){
+function rollD20(ability, score, setRecentRolls, proficiency, lvl){
     const modifier = getAbilityModifier(score)
     const dieRoll = Math.floor(Math.random() * 20) + 1;
-    const proBonus = getProficiency(proficiency);
+    const proBonus = getProficiency(proficiency, lvl);
     let total = 0
 
     if (proficiency > 0){
@@ -40,6 +48,7 @@ function rollD20(ability, score, setRecentRolls, proficiency){
 
 export default function Charactersheet() {
     const [hp, setHp] = useState(24);
+    const [lvl, setLvl] = useState(1)
 
     const [abilities, setAbilities] = useState({
         strength: 15,
@@ -88,6 +97,17 @@ export default function Charactersheet() {
             <h1>Character Sheet</h1>
             <div className="portrait_hp">
                 <section id="hp_ac">
+                    <div className='lvl'>
+                        <label htmlFor="lvl">LVL:</label>
+                        <input
+                            id="lvl"
+                            type="number"
+                            value={lvl}
+                            min="1"
+                            max="20"
+                            onChange={(event) => setLvl(Number(event.target.value))}
+                        />
+                    </div>
                     <div className="hp_row">
                         <label htmlFor="hp">HP: </label>
                         <input
@@ -117,37 +137,37 @@ export default function Charactersheet() {
                     <button 
                         className="btn btn-danger" 
                         type="button"
-                        onClick={() => rollD20('strength', abilities.strength, setRecentRolls, 0)}
+                        onClick={() => rollD20('strength', abilities.strength, setRecentRolls, 0, lvl)}
                     >Strength
                     </button>
                     <button 
                         className="btn btn-danger" 
                         type="button"
-                        onClick={() => rollD20('dexterity', abilities.dexterity, setRecentRolls, 0)}
+                        onClick={() => rollD20('dexterity', abilities.dexterity, setRecentRolls, 0, lvl)}
                         >Dexterity
                     </button>
                     <button 
                         className="btn btn-danger" 
                         type="button"
-                        onClick={() => rollD20('constitution', abilities.constitution, setRecentRolls, 0)}
+                        onClick={() => rollD20('constitution', abilities.constitution, setRecentRolls, 0, lvl)}
                         >Constitution
                     </button>
                     <button 
                         className="btn btn-danger" 
                         type="button"
-                        onClick={() => rollD20('intelligence', abilities.intelligence, setRecentRolls, 0)}
+                        onClick={() => rollD20('intelligence', abilities.intelligence, setRecentRolls, 0, lvl)}
                         >Intelligence
                     </button>
                     <button 
                         className="btn btn-danger" 
                         type="button"
-                        onClick={() => rollD20('wisdom', abilities.wisdom, setRecentRolls, 0)}
+                        onClick={() => rollD20('wisdom', abilities.wisdom, setRecentRolls, 0, lvl)}
                         >Wisdom
                     </button>
                     <button 
                         className="btn btn-danger" 
                         type="button"
-                        onClick={() => rollD20('charisma', abilities.charisma, setRecentRolls, 0)}
+                        onClick={() => rollD20('charisma', abilities.charisma, setRecentRolls, 0, lvl)}
                         >Charisma
                     </button>
                 </div>
@@ -169,37 +189,37 @@ export default function Charactersheet() {
                         <button 
                             className="btn btn-danger" 
                             type="button"
-                            onClick={() => rollD20('str saving throw', abilities.strength, setRecentRolls, savePro.strength)}
+                            onClick={() => rollD20('str saving throw', abilities.strength, setRecentRolls, savePro.strength, lvl)}
                             >STR
                         </button>
                         <button 
                             className="btn btn-danger" 
                             type="button"
-                            onClick={() => rollD20('dex savaing throw', abilities.dexterity, setRecentRolls, savePro.dexterity)}
+                            onClick={() => rollD20('dex savaing throw', abilities.dexterity, setRecentRolls, savePro.dexterity, lvl)}
                             >DEX
                         </button>
                         <button 
                             className="btn btn-danger" 
                             type="button"
-                            onClick={() => rollD20('con saving throw', abilities.constitution, setRecentRolls, savePro.constitution)}
+                            onClick={() => rollD20('con saving throw', abilities.constitution, setRecentRolls, savePro.constitution, lvl)}
                             >CON
                         </button>
                         <button 
                             className="btn btn-danger" 
                             type="button"
-                            onClick={() => rollD20('int saving throw', abilities.intelligence, setRecentRolls, savePro.intelligence)}
+                            onClick={() => rollD20('int saving throw', abilities.intelligence, setRecentRolls, savePro.intelligence, lvl)}
                             >INT
                         </button>
                         <button 
                             className="btn btn-danger" 
                             type="button"
-                            onClick={() => rollD20('wis saving throw', abilities.wisdom, setRecentRolls, savePro.wisdom)}
+                            onClick={() => rollD20('wis saving throw', abilities.wisdom, setRecentRolls, savePro.wisdom, lvl)}
                             >WIS
                         </button>
                         <button 
                             className="btn btn-danger" 
                             type="button"
-                            onClick={() => rollD20('cha saving throw', abilities.charisma, setRecentRolls, savePro.charisma)}
+                            onClick={() => rollD20('cha saving throw', abilities.charisma, setRecentRolls, savePro.charisma, lvl)}
                             >CHA
                         </button>
                     </div>
@@ -212,55 +232,55 @@ export default function Charactersheet() {
                             <button 
                                 className="btn btn-danger" 
                                 type="button"
-                                onClick={() => rollD20('acrobatics', abilities.dexterity, setRecentRolls, skillPro.acrobatics)}
+                                onClick={() => rollD20('acrobatics', abilities.dexterity, setRecentRolls, skillPro.acrobatics, lvl)}
                                 >Acrobatics
                             </button>
                             <button 
                                 className="btn btn-danger" 
                                 type="button"
-                                onClick={() => rollD20('animal handling', abilities.wisdom, setRecentRolls, skillPro.animalHandling)}
+                                onClick={() => rollD20('animal handling', abilities.wisdom, setRecentRolls, skillPro.animalHandling, lvl)}
                                 >Animal Handling
                             </button>
                             <button 
                                 className="btn btn-danger" 
                                 type="button"
-                                onClick={() => rollD20('arcana', abilities.intelligence, setRecentRolls, skillPro.arcana)}
+                                onClick={() => rollD20('arcana', abilities.intelligence, setRecentRolls, skillPro.arcana, lvl)}
                                 >Arcana
                             </button>
                             <button 
                                 className="btn btn-danger" 
                                 type="button"
-                                onClick={() => rollD20('athletics', abilities.strength, setRecentRolls, skillPro.athletics)}
+                                onClick={() => rollD20('athletics', abilities.strength, setRecentRolls, skillPro.athletics, lvl)}
                                 >Athletics
                             </button>
                             <button 
                                 className="btn btn-danger" 
                                 type="button"
-                                onClick={() => rollD20('deception', abilities.charisma, setRecentRolls, skillPro.deception)}
+                                onClick={() => rollD20('deception', abilities.charisma, setRecentRolls, skillPro.deception, lvl)}
                                 >Deception
                             </button>
                             <button 
                                 className="btn btn-danger" 
                                 type="button"
-                                onClick={() => rollD20('history', abilities.wisdom, setRecentRolls, skillPro.history)}
+                                onClick={() => rollD20('history', abilities.intelligence, setRecentRolls, skillPro.history, lvl)}
                                 >History
                             </button>
                             <button 
                                 className="btn btn-danger" 
                                 type="button"
-                                onClick={() => rollD20('insight', abilities.intelligence, setRecentRolls, skillPro.insight)}
+                                onClick={() => rollD20('insight', abilities.wisdom, setRecentRolls, skillPro.insight, lvl)}
                                 >Insight
                             </button>
                             <button 
                                 className="btn btn-danger" 
                                 type="button"
-                                onClick={() => rollD20('intimidation', abilities.charisma, setRecentRolls, skillPro.intimidation)}
+                                onClick={() => rollD20('intimidation', abilities.charisma, setRecentRolls, skillPro.intimidation, lvl)}
                                 >Intimidation
                             </button>
                             <button 
                                 className="btn btn-danger" 
                                 type="button"
-                                onClick={() => rollD20('investigation', abilities.intelligence, setRecentRolls, skillPro.investigation)}
+                                onClick={() => rollD20('investigation', abilities.intelligence, setRecentRolls, skillPro.investigation, lvl)}
                                 >Investigation
                             </button>
                         </div>
@@ -268,55 +288,55 @@ export default function Charactersheet() {
                             <button 
                                 className="btn btn-danger" 
                                 type="button"
-                                onClick={() => rollD20('medicine', abilities.intelligence, setRecentRolls, skillPro.medicine)}
+                                onClick={() => rollD20('medicine', abilities.wisdom, setRecentRolls, skillPro.medicine, lvl)}
                                 >Medicine
                             </button>
                             <button 
                                 className="btn btn-danger" 
                                 type="button"
-                                onClick={() => rollD20('nature', abilities.wisdom, setRecentRolls, skillPro.nature)}
+                                onClick={() => rollD20('nature', abilities.intelligence, setRecentRolls, skillPro.nature, lvl)}
                                 >Nature
                             </button>
                             <button 
                                 className="btn btn-danger" 
                                 type="button"
-                                onClick={() => rollD20('perception', abilities.intelligence, setRecentRolls, skillPro.perception)}
+                                onClick={() => rollD20('perception', abilities.wisdom, setRecentRolls, skillPro.perception, lvl)}
                                 >Perception
                             </button>
                             <button 
                                 className="btn btn-danger" 
                                 type="button"
-                                onClick={() => rollD20('performance', abilities.charisma, setRecentRolls, skillPro.performance)}
+                                onClick={() => rollD20('performance', abilities.charisma, setRecentRolls, skillPro.performance, lvl)}
                                 >Performance
                             </button>
                             <button 
                                 className="btn btn-danger" 
                                 type="button"
-                                onClick={() => rollD20('persuasion', abilities.charisma, setRecentRolls, skillPro.persuasion)}
+                                onClick={() => rollD20('persuasion', abilities.charisma, setRecentRolls, skillPro.persuasion, lvl)}
                                 >Persuasion
                             </button>
                             <button 
                                 className="btn btn-danger" 
                                 type="button"
-                                onClick={() => rollD20('religion', abilities.wisdom, setRecentRolls, skillPro.religion)}
+                                onClick={() => rollD20('religion', abilities.intelligence, setRecentRolls, skillPro.religion, lvl)}
                                 >Religion
                             </button>
                             <button 
                                 className="btn btn-danger" 
                                 type="button"
-                                onClick={() => rollD20('sleight of hands', abilities.dexterity, setRecentRolls, skillPro.sleightHands)}
+                                onClick={() => rollD20('sleight of hands', abilities.dexterity, setRecentRolls, skillPro.sleightHands, lvl)}
                                 >Sleight of Hands
                             </button>
                             <button 
                                 className="btn btn-danger" 
                                 type="button"
-                                onClick={() => rollD20('stealth', abilities.dexterity, setRecentRolls, skillPro.stealth)}
+                                onClick={() => rollD20('stealth', abilities.dexterity, setRecentRolls, skillPro.stealth, lvl)}
                                 >Stealth
                             </button>
                             <button 
                                 className="btn btn-danger" 
                                 type="button"
-                                onClick={() => rollD20('survival', abilities.wisdom, setRecentRolls, skillPro.survival)}
+                                onClick={() => rollD20('survival', abilities.wisdom, setRecentRolls, skillPro.survival, lvl)}
                                 >Survival
                             </button>
                         </div>

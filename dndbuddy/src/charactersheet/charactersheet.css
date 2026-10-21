@@ -36,14 +36,28 @@ main h1 {
     font-size: 25px;
 }
 
+#lvl {
+    font-family: "Cinzel", Georgia, serif;
+    background: none;
+    border: none;
+    color: #f0e5cc;
+    font-size: 25px;
+    width: 3.5rem;
+}
+
 label[for="hp"]{
     font-size: 25px;
 }
 
+.lvl,
 .hp_row {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+label[for="lvl"] {
+    font-size: 25px;
 }
 
 #ac {
