@@ -205,13 +205,13 @@ export default function Charactersheet() {
                     </div>
                     <div className="hp_row">
                         <label htmlFor="hp">HP: </label>
-                            <input
-                                id="hp"
-                                type="number"
-                                placeholder='1'
-                                min="0"
-                                max="565"
-                            />
+                        <input
+                            id="hp"
+                            type="number"
+                            placeholder='1'
+                            min="0"
+                            max="565"
+                        />
                     </div>
 
                     <strong id="ac">AC: 17</strong>
@@ -470,36 +470,214 @@ export default function Charactersheet() {
                             onClick={() => rollD20('str saving throw', abilities.strength, setRecentRolls, savePro.strength, lvl)}
                         >STR
                         </button>
+                        {isEditing ? (
+                            <label className="proficiency_control">
+                                <input
+                                    type="checkbox"
+                                    checked={draft.savePro.strength === 1}
+                                    onChange={(event) =>
+                                        setDraft((currentDraft) => ({
+                                            ...currentDraft,
+                                            savePro: {
+                                                ...currentDraft.skillPro,
+                                                strength: event.target.checked ? 1 : 0,
+                                            },
+                                        }))
+                                    }
+                                />
+                                Proficient
+                            </label>
+                        ) : (
+                            <span
+                                className='proficiency_marker'
+                                aria-label={
+                                    savePro.strength === 1 ? 'Proficient' : 'Not proficient'
+                                }
+                                title={savePro.strength === 1 ? 'Proficient' : 'Not proficient'}
+                            >
+                                {savePro.strength == 1 ? '✓' : '—'}
+                            </span>
+                        )}
+
                         <button
                             className="btn btn-danger"
                             type="button"
                             onClick={() => rollD20('dex savaing throw', abilities.dexterity, setRecentRolls, savePro.dexterity, lvl)}
                         >DEX
                         </button>
+                        {isEditing ? (
+                            <label className="proficiency_control">
+                                <input
+                                    type="checkbox"
+                                    checked={draft.savePro.dexterity === 1}
+                                    onChange={(event) =>
+                                        setDraft((currentDraft) => ({
+                                            ...currentDraft,
+                                            savePro: {
+                                                ...currentDraft.skillPro,
+                                                dexterity: event.target.checked ? 1 : 0,
+                                            },
+                                        }))
+                                    }
+                                />
+                                Proficient
+                            </label>
+                        ) : (
+                            <span
+                                className='proficiency_marker'
+                                aria-label={
+                                    savePro.dexterity === 1 ? 'Proficient' : 'Not proficient'
+                                }
+                                title={savePro.dexterity === 1 ? 'Proficient' : 'Not proficient'}
+                            >
+                                {savePro.dexterity == 1 ? '✓' : '—'}
+                            </span>
+                        )}
+
+
                         <button
                             className="btn btn-danger"
                             type="button"
                             onClick={() => rollD20('con saving throw', abilities.constitution, setRecentRolls, savePro.constitution, lvl)}
                         >CON
                         </button>
+                        {isEditing ? (
+                            <label className="proficiency_control">
+                                <input
+                                    type="checkbox"
+                                    checked={draft.savePro.constitution === 1}
+                                    onChange={(event) =>
+                                        setDraft((currentDraft) => ({
+                                            ...currentDraft,
+                                            savePro: {
+                                                ...currentDraft.skillPro,
+                                                constitution: event.target.checked ? 1 : 0,
+                                            },
+                                        }))
+                                    }
+                                />
+                                Proficient
+                            </label>
+                        ) : (
+                            <span
+                                className='proficiency_marker'
+                                aria-label={
+                                    savePro.constitution === 1 ? 'Proficient' : 'Not proficient'
+                                }
+                                title={savePro.constitution === 1 ? 'Proficient' : 'Not proficient'}
+                            >
+                                {savePro.constitution == 1 ? '✓' : '—'}
+                            </span>
+                        )}
+
                         <button
                             className="btn btn-danger"
                             type="button"
                             onClick={() => rollD20('int saving throw', abilities.intelligence, setRecentRolls, savePro.intelligence, lvl)}
                         >INT
                         </button>
+                        {isEditing ? (
+                            <label className="proficiency_control">
+                                <input
+                                    type="checkbox"
+                                    checked={draft.savePro.intelligence === 1}
+                                    onChange={(event) =>
+                                        setDraft((currentDraft) => ({
+                                            ...currentDraft,
+                                            savePro: {
+                                                ...currentDraft.skillPro,
+                                                intelligence: event.target.checked ? 1 : 0,
+                                            },
+                                        }))
+                                    }
+                                />
+                                Proficient
+                            </label>
+                        ) : (
+                            <span
+                                className='proficiency_marker'
+                                aria-label={
+                                    savePro.intelligence === 1 ? 'Proficient' : 'Not proficient'
+                                }
+                                title={savePro.intelligence === 1 ? 'Proficient' : 'Not proficient'}
+                            >
+                                {savePro.intelligence == 1 ? '✓' : '—'}
+                            </span>
+                        )}
+
+
                         <button
                             className="btn btn-danger"
                             type="button"
                             onClick={() => rollD20('wis saving throw', abilities.wisdom, setRecentRolls, savePro.wisdom, lvl)}
                         >WIS
                         </button>
+                        {isEditing ? (
+                            <label className="proficiency_control">
+                                <input
+                                    type="checkbox"
+                                    checked={draft.savePro.wisdom === 1}
+                                    onChange={(event) =>
+                                        setDraft((currentDraft) => ({
+                                            ...currentDraft,
+                                            savePro: {
+                                                ...currentDraft.skillPro,
+                                                wisdom: event.target.checked ? 1 : 0,
+                                            },
+                                        }))
+                                    }
+                                />
+                                Proficient
+                            </label>
+                        ) : (
+                            <span
+                                className='proficiency_marker'
+                                aria-label={
+                                    savePro.wisdom === 1 ? 'Proficient' : 'Not proficient'
+                                }
+                                title={savePro.wisdom === 1 ? 'Proficient' : 'Not proficient'}
+                            >
+                                {savePro.wisdom == 1 ? '✓' : '—'}
+                            </span>
+                        )}
+
+
                         <button
                             className="btn btn-danger"
                             type="button"
                             onClick={() => rollD20('cha saving throw', abilities.charisma, setRecentRolls, savePro.charisma, lvl)}
                         >CHA
                         </button>
+                        {isEditing ? (
+                            <label className="proficiency_control">
+                                <input
+                                    type="checkbox"
+                                    checked={draft.savePro.charisma === 1}
+                                    onChange={(event) =>
+                                        setDraft((currentDraft) => ({
+                                            ...currentDraft,
+                                            savePro: {
+                                                ...currentDraft.skillPro,
+                                                charisma: event.target.checked ? 1 : 0,
+                                            },
+                                        }))
+                                    }
+                                />
+                                Proficient
+                            </label>
+                        ) : (
+                            <span
+                                className='proficiency_marker'
+                                aria-label={
+                                    savePro.charisma === 1 ? 'Proficient' : 'Not proficient'
+                                }
+                                title={savePro.charisma === 1 ? 'Proficient' : 'Not proficient'}
+                            >
+                                {savePro.charisma == 1 ? '✓' : '—'}
+                            </span>
+                        )}
+
+
                     </div>
                 </section>
 
@@ -518,7 +696,7 @@ export default function Charactersheet() {
                                     <input
                                         type="checkbox"
                                         checked={draft.skillPro.acrobatics === 1}
-                                        onChange={(event) => 
+                                        onChange={(event) =>
                                             setDraft((currentDraft) => ({
                                                 ...currentDraft,
                                                 skillPro: {
@@ -527,8 +705,8 @@ export default function Charactersheet() {
                                                 },
                                             }))
                                         }
-                                />
-                                Proficient
+                                    />
+                                    Proficient
                                 </label>
                             ) : (
                                 <span
@@ -555,7 +733,7 @@ export default function Charactersheet() {
                                     <input
                                         type="checkbox"
                                         checked={draft.skillPro.animalHandling === 1}
-                                        onChange={(event) => 
+                                        onChange={(event) =>
                                             setDraft((currentDraft) => ({
                                                 ...currentDraft,
                                                 skillPro: {
@@ -564,8 +742,8 @@ export default function Charactersheet() {
                                                 },
                                             }))
                                         }
-                                />
-                                Proficient
+                                    />
+                                    Proficient
                                 </label>
                             ) : (
                                 <span
@@ -590,7 +768,7 @@ export default function Charactersheet() {
                                     <input
                                         type="checkbox"
                                         checked={draft.skillPro.arcana === 1}
-                                        onChange={(event) => 
+                                        onChange={(event) =>
                                             setDraft((currentDraft) => ({
                                                 ...currentDraft,
                                                 skillPro: {
@@ -599,8 +777,8 @@ export default function Charactersheet() {
                                                 },
                                             }))
                                         }
-                                />
-                                Proficient
+                                    />
+                                    Proficient
                                 </label>
                             ) : (
                                 <span
@@ -626,7 +804,7 @@ export default function Charactersheet() {
                                     <input
                                         type="checkbox"
                                         checked={draft.skillPro.athletics === 1}
-                                        onChange={(event) => 
+                                        onChange={(event) =>
                                             setDraft((currentDraft) => ({
                                                 ...currentDraft,
                                                 skillPro: {
@@ -635,8 +813,8 @@ export default function Charactersheet() {
                                                 },
                                             }))
                                         }
-                                />
-                                Proficient
+                                    />
+                                    Proficient
                                 </label>
                             ) : (
                                 <span
@@ -661,7 +839,7 @@ export default function Charactersheet() {
                                     <input
                                         type="checkbox"
                                         checked={draft.skillPro.deception === 1}
-                                        onChange={(event) => 
+                                        onChange={(event) =>
                                             setDraft((currentDraft) => ({
                                                 ...currentDraft,
                                                 skillPro: {
@@ -670,8 +848,8 @@ export default function Charactersheet() {
                                                 },
                                             }))
                                         }
-                                />
-                                Proficient
+                                    />
+                                    Proficient
                                 </label>
                             ) : (
                                 <span
@@ -697,7 +875,7 @@ export default function Charactersheet() {
                                     <input
                                         type="checkbox"
                                         checked={draft.skillPro.history === 1}
-                                        onChange={(event) => 
+                                        onChange={(event) =>
                                             setDraft((currentDraft) => ({
                                                 ...currentDraft,
                                                 skillPro: {
@@ -706,8 +884,8 @@ export default function Charactersheet() {
                                                 },
                                             }))
                                         }
-                                />
-                                Proficient
+                                    />
+                                    Proficient
                                 </label>
                             ) : (
                                 <span
@@ -732,7 +910,7 @@ export default function Charactersheet() {
                                     <input
                                         type="checkbox"
                                         checked={draft.skillPro.insight === 1}
-                                        onChange={(event) => 
+                                        onChange={(event) =>
                                             setDraft((currentDraft) => ({
                                                 ...currentDraft,
                                                 skillPro: {
@@ -741,8 +919,8 @@ export default function Charactersheet() {
                                                 },
                                             }))
                                         }
-                                />
-                                Proficient
+                                    />
+                                    Proficient
                                 </label>
                             ) : (
                                 <span
@@ -767,7 +945,7 @@ export default function Charactersheet() {
                                     <input
                                         type="checkbox"
                                         checked={draft.skillPro.intimidation === 1}
-                                        onChange={(event) => 
+                                        onChange={(event) =>
                                             setDraft((currentDraft) => ({
                                                 ...currentDraft,
                                                 skillPro: {
@@ -776,8 +954,8 @@ export default function Charactersheet() {
                                                 },
                                             }))
                                         }
-                                />
-                                Proficient
+                                    />
+                                    Proficient
                                 </label>
                             ) : (
                                 <span
@@ -802,7 +980,7 @@ export default function Charactersheet() {
                                     <input
                                         type="checkbox"
                                         checked={draft.skillPro.investigation === 1}
-                                        onChange={(event) => 
+                                        onChange={(event) =>
                                             setDraft((currentDraft) => ({
                                                 ...currentDraft,
                                                 skillPro: {
@@ -811,8 +989,8 @@ export default function Charactersheet() {
                                                 },
                                             }))
                                         }
-                                />
-                                Proficient
+                                    />
+                                    Proficient
                                 </label>
                             ) : (
                                 <span
@@ -840,7 +1018,7 @@ export default function Charactersheet() {
                                     <input
                                         type="checkbox"
                                         checked={draft.skillPro.medicine === 1}
-                                        onChange={(event) => 
+                                        onChange={(event) =>
                                             setDraft((currentDraft) => ({
                                                 ...currentDraft,
                                                 skillPro: {
@@ -849,8 +1027,8 @@ export default function Charactersheet() {
                                                 },
                                             }))
                                         }
-                                />
-                                Proficient
+                                    />
+                                    Proficient
                                 </label>
                             ) : (
                                 <span
@@ -876,7 +1054,7 @@ export default function Charactersheet() {
                                     <input
                                         type="checkbox"
                                         checked={draft.skillPro.nature === 1}
-                                        onChange={(event) => 
+                                        onChange={(event) =>
                                             setDraft((currentDraft) => ({
                                                 ...currentDraft,
                                                 skillPro: {
@@ -885,8 +1063,8 @@ export default function Charactersheet() {
                                                 },
                                             }))
                                         }
-                                />
-                                Proficient
+                                    />
+                                    Proficient
                                 </label>
                             ) : (
                                 <span
@@ -911,7 +1089,7 @@ export default function Charactersheet() {
                                     <input
                                         type="checkbox"
                                         checked={draft.skillPro.perception === 1}
-                                        onChange={(event) => 
+                                        onChange={(event) =>
                                             setDraft((currentDraft) => ({
                                                 ...currentDraft,
                                                 skillPro: {
@@ -920,8 +1098,8 @@ export default function Charactersheet() {
                                                 },
                                             }))
                                         }
-                                />
-                                Proficient
+                                    />
+                                    Proficient
                                 </label>
                             ) : (
                                 <span
@@ -946,7 +1124,7 @@ export default function Charactersheet() {
                                     <input
                                         type="checkbox"
                                         checked={draft.skillPro.performance === 1}
-                                        onChange={(event) => 
+                                        onChange={(event) =>
                                             setDraft((currentDraft) => ({
                                                 ...currentDraft,
                                                 skillPro: {
@@ -955,8 +1133,8 @@ export default function Charactersheet() {
                                                 },
                                             }))
                                         }
-                                />
-                                Proficient
+                                    />
+                                    Proficient
                                 </label>
                             ) : (
                                 <span
@@ -981,7 +1159,7 @@ export default function Charactersheet() {
                                     <input
                                         type="checkbox"
                                         checked={draft.skillPro.persuasion === 1}
-                                        onChange={(event) => 
+                                        onChange={(event) =>
                                             setDraft((currentDraft) => ({
                                                 ...currentDraft,
                                                 skillPro: {
@@ -990,8 +1168,8 @@ export default function Charactersheet() {
                                                 },
                                             }))
                                         }
-                                />
-                                Proficient
+                                    />
+                                    Proficient
                                 </label>
                             ) : (
                                 <span
@@ -1017,7 +1195,7 @@ export default function Charactersheet() {
                                     <input
                                         type="checkbox"
                                         checked={draft.skillPro.religion === 1}
-                                        onChange={(event) => 
+                                        onChange={(event) =>
                                             setDraft((currentDraft) => ({
                                                 ...currentDraft,
                                                 skillPro: {
@@ -1026,8 +1204,8 @@ export default function Charactersheet() {
                                                 },
                                             }))
                                         }
-                                />
-                                Proficient
+                                    />
+                                    Proficient
                                 </label>
                             ) : (
                                 <span
@@ -1052,7 +1230,7 @@ export default function Charactersheet() {
                                     <input
                                         type="checkbox"
                                         checked={draft.skillPro.sleightHands === 1}
-                                        onChange={(event) => 
+                                        onChange={(event) =>
                                             setDraft((currentDraft) => ({
                                                 ...currentDraft,
                                                 skillPro: {
@@ -1061,8 +1239,8 @@ export default function Charactersheet() {
                                                 },
                                             }))
                                         }
-                                />
-                                Proficient
+                                    />
+                                    Proficient
                                 </label>
                             ) : (
                                 <span
@@ -1087,7 +1265,7 @@ export default function Charactersheet() {
                                     <input
                                         type="checkbox"
                                         checked={draft.skillPro.stealth === 1}
-                                        onChange={(event) => 
+                                        onChange={(event) =>
                                             setDraft((currentDraft) => ({
                                                 ...currentDraft,
                                                 skillPro: {
@@ -1096,8 +1274,8 @@ export default function Charactersheet() {
                                                 },
                                             }))
                                         }
-                                />
-                                Proficient
+                                    />
+                                    Proficient
                                 </label>
                             ) : (
                                 <span
@@ -1122,7 +1300,7 @@ export default function Charactersheet() {
                                     <input
                                         type="checkbox"
                                         checked={draft.skillPro.survival === 1}
-                                        onChange={(event) => 
+                                        onChange={(event) =>
                                             setDraft((currentDraft) => ({
                                                 ...currentDraft,
                                                 skillPro: {
@@ -1131,8 +1309,8 @@ export default function Charactersheet() {
                                                 },
                                             }))
                                         }
-                                />
-                                Proficient
+                                    />
+                                    Proficient
                                 </label>
                             ) : (
                                 <span
