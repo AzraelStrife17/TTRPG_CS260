@@ -191,6 +191,20 @@ label[for="lvl"] {
     flex: 1 1 7rem;
 }
 
+.proficiency_control {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.proficiency_marker {
+    min-width: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
 .api_placeholder {
     display: flex;
     flex-direction: column;

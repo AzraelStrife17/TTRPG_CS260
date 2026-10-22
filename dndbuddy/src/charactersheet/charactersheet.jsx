@@ -107,21 +107,21 @@ export default function Charactersheet() {
     const [lvl, setLvl] = useState(1)
 
     const [abilities, setAbilities] = useState({
-        strength: 15,
-        dexterity: 14,
-        constitution: 13,
-        intelligence: 12,
-        wisdom: 10,
-        charisma: 8,
+        strength: 1,
+        dexterity: 1,
+        constitution: 1,
+        intelligence: 1,
+        wisdom: 1,
+        charisma: 1,
     });
 
     const [savePro, setSavePro] = useState({
-        strength: 1,
+        strength: 0,
         dexterity: 0,
         constitution: 0,
         intelligence: 0,
         wisdom: 0,
-        charisma: 1,
+        charisma: 0,
 
     });
 
@@ -153,9 +153,10 @@ export default function Charactersheet() {
 
     function startEditing() {
         setDraft({
-            hp,
             lvl,
             abilities: { ...abilities },
+            skillPro: { ...skillPro },
+            savePro: { ...savePro },
         });
         setIsEditing(true)
     }
@@ -166,6 +167,10 @@ export default function Charactersheet() {
         setHp(draft.hp);
         setLvl(draft.lvl);
         setAbilities(draft.abilities);
+        setSkillPro(draft.skillPro);
+        setSavePro(draft.savePro);
+
+
         setIsEditing(false);
         setDraft(null);
     }
@@ -182,32 +187,33 @@ export default function Charactersheet() {
                 <section id="hp_ac">
                     <div className='lvl'>
                         <label htmlFor="lvl">LVL:</label>
-                        <input
-                            id="lvl"
-                            type="number"
-                            value={lvl}
-                            min="1"
-                            max="20"
-                            onChange={(event) => setLvl(Number(event.target.value))}
-                        />
-                    </div>
-                    <div className="hp_row">
-                        <label htmlFor="hp">HP: </label>
                         {isEditing ? (
                             <input
-                                id="hp"
+                                id="lvl"
                                 type="number"
-                                value={draft.hp}
-                                min="0"
-                                max="30"
+                                value={draft.lvl}
+                                min="1"
+                                max="20"
                                 onChange={(event) =>
-                                    setDraft({ ...draft, hp: Number(event.target.value) })
+                                    setDraft({ ...draft, lvl: Number(event.target.value) })
                                 }
                             />
                         ) : (
-                            <span>{hp}</span>
+                            <span>{lvl}</span>
                         )}
+
                     </div>
+                    <div className="hp_row">
+                        <label htmlFor="hp">HP: </label>
+                            <input
+                                id="hp"
+                                type="number"
+                                placeholder='1'
+                                min="0"
+                                max="565"
+                            />
+                    </div>
+
                     <strong id="ac">AC: 17</strong>
                 </section>
 
@@ -507,6 +513,37 @@ export default function Charactersheet() {
                                 onClick={() => rollD20('acrobatics', abilities.dexterity, setRecentRolls, skillPro.acrobatics, lvl)}
                             >Acrobatics
                             </button>
+                            {isEditing ? (
+                                <label className="proficiency_control">
+                                    <input
+                                        type="checkbox"
+                                        checked={draft.skillPro.acrobatics === 1}
+                                        onChange={(event) => 
+                                            setDraft((currentDraft) => ({
+                                                ...currentDraft,
+                                                skillPro: {
+                                                    ...currentDraft.skillPro,
+                                                    acrobatics: event.target.checked ? 1 : 0,
+                                                },
+                                            }))
+                                        }
+                                />
+                                Proficient
+                                </label>
+                            ) : (
+                                <span
+                                    className='proficiency_marker'
+                                    aria-label={
+                                        skillPro.acrobatics === 1 ? 'Proficient' : 'Not proficient'
+                                    }
+                                    title={skillPro.acrobatics === 1 ? 'Proficient' : 'Not proficient'}
+                                >
+                                    {skillPro.acrobatics == 1 ? '✓' : '—'}
+                                </span>
+                            )}
+
+
+
                             <button
                                 className="btn btn-danger"
                                 type="button"
