@@ -138,8 +138,8 @@ export default function Charactersheet() {
         medicine: 0,
         nature: 0,
         perception: 0,
-        performance: 1,
-        persuasion: 1,
+        performance: 0,
+        persuasion: 0,
         religion: 0,
         sleightHands: 0,
         stealth: 0,
@@ -550,48 +550,283 @@ export default function Charactersheet() {
                                 onClick={() => rollD20('animal handling', abilities.wisdom, setRecentRolls, skillPro.animalHandling, lvl)}
                             >Animal Handling
                             </button>
+                            {isEditing ? (
+                                <label className="proficiency_control">
+                                    <input
+                                        type="checkbox"
+                                        checked={draft.skillPro.animalHandling === 1}
+                                        onChange={(event) => 
+                                            setDraft((currentDraft) => ({
+                                                ...currentDraft,
+                                                skillPro: {
+                                                    ...currentDraft.skillPro,
+                                                    animalHandling: event.target.checked ? 1 : 0,
+                                                },
+                                            }))
+                                        }
+                                />
+                                Proficient
+                                </label>
+                            ) : (
+                                <span
+                                    className='proficiency_marker'
+                                    aria-label={
+                                        skillPro.animalHandling === 1 ? 'Proficient' : 'Not proficient'
+                                    }
+                                    title={skillPro.animalHandling === 1 ? 'Proficient' : 'Not proficient'}
+                                >
+                                    {skillPro.animalHandling == 1 ? '✓' : '—'}
+                                </span>
+                            )}
+
                             <button
                                 className="btn btn-danger"
                                 type="button"
                                 onClick={() => rollD20('arcana', abilities.intelligence, setRecentRolls, skillPro.arcana, lvl)}
                             >Arcana
                             </button>
+                            {isEditing ? (
+                                <label className="proficiency_control">
+                                    <input
+                                        type="checkbox"
+                                        checked={draft.skillPro.arcana === 1}
+                                        onChange={(event) => 
+                                            setDraft((currentDraft) => ({
+                                                ...currentDraft,
+                                                skillPro: {
+                                                    ...currentDraft.skillPro,
+                                                    arcana: event.target.checked ? 1 : 0,
+                                                },
+                                            }))
+                                        }
+                                />
+                                Proficient
+                                </label>
+                            ) : (
+                                <span
+                                    className='proficiency_marker'
+                                    aria-label={
+                                        skillPro.arcana === 1 ? 'Proficient' : 'Not proficient'
+                                    }
+                                    title={skillPro.arcana === 1 ? 'Proficient' : 'Not proficient'}
+                                >
+                                    {skillPro.arcana == 1 ? '✓' : '—'}
+                                </span>
+                            )}
+
+
                             <button
                                 className="btn btn-danger"
                                 type="button"
                                 onClick={() => rollD20('athletics', abilities.strength, setRecentRolls, skillPro.athletics, lvl)}
                             >Athletics
                             </button>
+                            {isEditing ? (
+                                <label className="proficiency_control">
+                                    <input
+                                        type="checkbox"
+                                        checked={draft.skillPro.athletics === 1}
+                                        onChange={(event) => 
+                                            setDraft((currentDraft) => ({
+                                                ...currentDraft,
+                                                skillPro: {
+                                                    ...currentDraft.skillPro,
+                                                    athletics: event.target.checked ? 1 : 0,
+                                                },
+                                            }))
+                                        }
+                                />
+                                Proficient
+                                </label>
+                            ) : (
+                                <span
+                                    className='proficiency_marker'
+                                    aria-label={
+                                        skillPro.athletics === 1 ? 'Proficient' : 'Not proficient'
+                                    }
+                                    title={skillPro.athletics === 1 ? 'Proficient' : 'Not proficient'}
+                                >
+                                    {skillPro.athletics == 1 ? '✓' : '—'}
+                                </span>
+                            )}
+
                             <button
                                 className="btn btn-danger"
                                 type="button"
                                 onClick={() => rollD20('deception', abilities.charisma, setRecentRolls, skillPro.deception, lvl)}
                             >Deception
                             </button>
+                            {isEditing ? (
+                                <label className="proficiency_control">
+                                    <input
+                                        type="checkbox"
+                                        checked={draft.skillPro.deception === 1}
+                                        onChange={(event) => 
+                                            setDraft((currentDraft) => ({
+                                                ...currentDraft,
+                                                skillPro: {
+                                                    ...currentDraft.skillPro,
+                                                    deception: event.target.checked ? 1 : 0,
+                                                },
+                                            }))
+                                        }
+                                />
+                                Proficient
+                                </label>
+                            ) : (
+                                <span
+                                    className='proficiency_marker'
+                                    aria-label={
+                                        skillPro.deception === 1 ? 'Proficient' : 'Not proficient'
+                                    }
+                                    title={skillPro.deception === 1 ? 'Proficient' : 'Not proficient'}
+                                >
+                                    {skillPro.deception == 1 ? '✓' : '—'}
+                                </span>
+                            )}
+
+
                             <button
                                 className="btn btn-danger"
                                 type="button"
                                 onClick={() => rollD20('history', abilities.intelligence, setRecentRolls, skillPro.history, lvl)}
                             >History
                             </button>
+                            {isEditing ? (
+                                <label className="proficiency_control">
+                                    <input
+                                        type="checkbox"
+                                        checked={draft.skillPro.history === 1}
+                                        onChange={(event) => 
+                                            setDraft((currentDraft) => ({
+                                                ...currentDraft,
+                                                skillPro: {
+                                                    ...currentDraft.skillPro,
+                                                    history: event.target.checked ? 1 : 0,
+                                                },
+                                            }))
+                                        }
+                                />
+                                Proficient
+                                </label>
+                            ) : (
+                                <span
+                                    className='proficiency_marker'
+                                    aria-label={
+                                        skillPro.history === 1 ? 'Proficient' : 'Not proficient'
+                                    }
+                                    title={skillPro.history === 1 ? 'Proficient' : 'Not proficient'}
+                                >
+                                    {skillPro.history == 1 ? '✓' : '—'}
+                                </span>
+                            )}
+
                             <button
                                 className="btn btn-danger"
                                 type="button"
                                 onClick={() => rollD20('insight', abilities.wisdom, setRecentRolls, skillPro.insight, lvl)}
                             >Insight
                             </button>
+                            {isEditing ? (
+                                <label className="proficiency_control">
+                                    <input
+                                        type="checkbox"
+                                        checked={draft.skillPro.insight === 1}
+                                        onChange={(event) => 
+                                            setDraft((currentDraft) => ({
+                                                ...currentDraft,
+                                                skillPro: {
+                                                    ...currentDraft.skillPro,
+                                                    insight: event.target.checked ? 1 : 0,
+                                                },
+                                            }))
+                                        }
+                                />
+                                Proficient
+                                </label>
+                            ) : (
+                                <span
+                                    className='proficiency_marker'
+                                    aria-label={
+                                        skillPro.insight === 1 ? 'Proficient' : 'Not proficient'
+                                    }
+                                    title={skillPro.insight === 1 ? 'Proficient' : 'Not proficient'}
+                                >
+                                    {skillPro.insight == 1 ? '✓' : '—'}
+                                </span>
+                            )}
+
                             <button
                                 className="btn btn-danger"
                                 type="button"
                                 onClick={() => rollD20('intimidation', abilities.charisma, setRecentRolls, skillPro.intimidation, lvl)}
                             >Intimidation
                             </button>
+                            {isEditing ? (
+                                <label className="proficiency_control">
+                                    <input
+                                        type="checkbox"
+                                        checked={draft.skillPro.intimidation === 1}
+                                        onChange={(event) => 
+                                            setDraft((currentDraft) => ({
+                                                ...currentDraft,
+                                                skillPro: {
+                                                    ...currentDraft.skillPro,
+                                                    intimidation: event.target.checked ? 1 : 0,
+                                                },
+                                            }))
+                                        }
+                                />
+                                Proficient
+                                </label>
+                            ) : (
+                                <span
+                                    className='proficiency_marker'
+                                    aria-label={
+                                        skillPro.intimidation === 1 ? 'Proficient' : 'Not proficient'
+                                    }
+                                    title={skillPro.intimidation === 1 ? 'Proficient' : 'Not proficient'}
+                                >
+                                    {skillPro.intimidation == 1 ? '✓' : '—'}
+                                </span>
+                            )}
+
                             <button
                                 className="btn btn-danger"
                                 type="button"
                                 onClick={() => rollD20('investigation', abilities.intelligence, setRecentRolls, skillPro.investigation, lvl)}
                             >Investigation
                             </button>
+                            {isEditing ? (
+                                <label className="proficiency_control">
+                                    <input
+                                        type="checkbox"
+                                        checked={draft.skillPro.investigation === 1}
+                                        onChange={(event) => 
+                                            setDraft((currentDraft) => ({
+                                                ...currentDraft,
+                                                skillPro: {
+                                                    ...currentDraft.skillPro,
+                                                    investigation: event.target.checked ? 1 : 0,
+                                                },
+                                            }))
+                                        }
+                                />
+                                Proficient
+                                </label>
+                            ) : (
+                                <span
+                                    className='proficiency_marker'
+                                    aria-label={
+                                        skillPro.investigation === 1 ? 'Proficient' : 'Not proficient'
+                                    }
+                                    title={skillPro.investigation === 1 ? 'Proficient' : 'Not proficient'}
+                                >
+                                    {skillPro.investigation == 1 ? '✓' : '—'}
+                                </span>
+                            )}
+
+
                         </div>
                         <div className="skill_buttons2">
                             <button
@@ -600,54 +835,318 @@ export default function Charactersheet() {
                                 onClick={() => rollD20('medicine', abilities.wisdom, setRecentRolls, skillPro.medicine, lvl)}
                             >Medicine
                             </button>
+                            {isEditing ? (
+                                <label className="proficiency_control">
+                                    <input
+                                        type="checkbox"
+                                        checked={draft.skillPro.medicine === 1}
+                                        onChange={(event) => 
+                                            setDraft((currentDraft) => ({
+                                                ...currentDraft,
+                                                skillPro: {
+                                                    ...currentDraft.skillPro,
+                                                    medicine: event.target.checked ? 1 : 0,
+                                                },
+                                            }))
+                                        }
+                                />
+                                Proficient
+                                </label>
+                            ) : (
+                                <span
+                                    className='proficiency_marker'
+                                    aria-label={
+                                        skillPro.medicine === 1 ? 'Proficient' : 'Not proficient'
+                                    }
+                                    title={skillPro.medicine === 1 ? 'Proficient' : 'Not proficient'}
+                                >
+                                    {skillPro.medicine == 1 ? '✓' : '—'}
+                                </span>
+                            )}
+
+
                             <button
                                 className="btn btn-danger"
                                 type="button"
                                 onClick={() => rollD20('nature', abilities.intelligence, setRecentRolls, skillPro.nature, lvl)}
                             >Nature
                             </button>
+                            {isEditing ? (
+                                <label className="proficiency_control">
+                                    <input
+                                        type="checkbox"
+                                        checked={draft.skillPro.nature === 1}
+                                        onChange={(event) => 
+                                            setDraft((currentDraft) => ({
+                                                ...currentDraft,
+                                                skillPro: {
+                                                    ...currentDraft.skillPro,
+                                                    nature: event.target.checked ? 1 : 0,
+                                                },
+                                            }))
+                                        }
+                                />
+                                Proficient
+                                </label>
+                            ) : (
+                                <span
+                                    className='proficiency_marker'
+                                    aria-label={
+                                        skillPro.nature === 1 ? 'Proficient' : 'Not proficient'
+                                    }
+                                    title={skillPro.nature === 1 ? 'Proficient' : 'Not proficient'}
+                                >
+                                    {skillPro.nature == 1 ? '✓' : '—'}
+                                </span>
+                            )}
+
                             <button
                                 className="btn btn-danger"
                                 type="button"
                                 onClick={() => rollD20('perception', abilities.wisdom, setRecentRolls, skillPro.perception, lvl)}
                             >Perception
                             </button>
+                            {isEditing ? (
+                                <label className="proficiency_control">
+                                    <input
+                                        type="checkbox"
+                                        checked={draft.skillPro.perception === 1}
+                                        onChange={(event) => 
+                                            setDraft((currentDraft) => ({
+                                                ...currentDraft,
+                                                skillPro: {
+                                                    ...currentDraft.skillPro,
+                                                    perception: event.target.checked ? 1 : 0,
+                                                },
+                                            }))
+                                        }
+                                />
+                                Proficient
+                                </label>
+                            ) : (
+                                <span
+                                    className='proficiency_marker'
+                                    aria-label={
+                                        skillPro.perception === 1 ? 'Proficient' : 'Not proficient'
+                                    }
+                                    title={skillPro.perception === 1 ? 'Proficient' : 'Not proficient'}
+                                >
+                                    {skillPro.perception == 1 ? '✓' : '—'}
+                                </span>
+                            )}
+
                             <button
                                 className="btn btn-danger"
                                 type="button"
                                 onClick={() => rollD20('performance', abilities.charisma, setRecentRolls, skillPro.performance, lvl)}
                             >Performance
                             </button>
+                            {isEditing ? (
+                                <label className="proficiency_control">
+                                    <input
+                                        type="checkbox"
+                                        checked={draft.skillPro.performance === 1}
+                                        onChange={(event) => 
+                                            setDraft((currentDraft) => ({
+                                                ...currentDraft,
+                                                skillPro: {
+                                                    ...currentDraft.skillPro,
+                                                    performance: event.target.checked ? 1 : 0,
+                                                },
+                                            }))
+                                        }
+                                />
+                                Proficient
+                                </label>
+                            ) : (
+                                <span
+                                    className='proficiency_marker'
+                                    aria-label={
+                                        skillPro.performance === 1 ? 'Proficient' : 'Not proficient'
+                                    }
+                                    title={skillPro.performance === 1 ? 'Proficient' : 'Not proficient'}
+                                >
+                                    {skillPro.performance == 1 ? '✓' : '—'}
+                                </span>
+                            )}
+
                             <button
                                 className="btn btn-danger"
                                 type="button"
                                 onClick={() => rollD20('persuasion', abilities.charisma, setRecentRolls, skillPro.persuasion, lvl)}
                             >Persuasion
                             </button>
+                            {isEditing ? (
+                                <label className="proficiency_control">
+                                    <input
+                                        type="checkbox"
+                                        checked={draft.skillPro.persuasion === 1}
+                                        onChange={(event) => 
+                                            setDraft((currentDraft) => ({
+                                                ...currentDraft,
+                                                skillPro: {
+                                                    ...currentDraft.skillPro,
+                                                    persuasion: event.target.checked ? 1 : 0,
+                                                },
+                                            }))
+                                        }
+                                />
+                                Proficient
+                                </label>
+                            ) : (
+                                <span
+                                    className='proficiency_marker'
+                                    aria-label={
+                                        skillPro.persuasion === 1 ? 'Proficient' : 'Not proficient'
+                                    }
+                                    title={skillPro.persuasion === 1 ? 'Proficient' : 'Not proficient'}
+                                >
+                                    {skillPro.persuasion == 1 ? '✓' : '—'}
+                                </span>
+                            )}
+
+
                             <button
                                 className="btn btn-danger"
                                 type="button"
                                 onClick={() => rollD20('religion', abilities.intelligence, setRecentRolls, skillPro.religion, lvl)}
                             >Religion
                             </button>
+                            {isEditing ? (
+                                <label className="proficiency_control">
+                                    <input
+                                        type="checkbox"
+                                        checked={draft.skillPro.religion === 1}
+                                        onChange={(event) => 
+                                            setDraft((currentDraft) => ({
+                                                ...currentDraft,
+                                                skillPro: {
+                                                    ...currentDraft.skillPro,
+                                                    religion: event.target.checked ? 1 : 0,
+                                                },
+                                            }))
+                                        }
+                                />
+                                Proficient
+                                </label>
+                            ) : (
+                                <span
+                                    className='proficiency_marker'
+                                    aria-label={
+                                        skillPro.religion === 1 ? 'Proficient' : 'Not proficient'
+                                    }
+                                    title={skillPro.religion === 1 ? 'Proficient' : 'Not proficient'}
+                                >
+                                    {skillPro.religion == 1 ? '✓' : '—'}
+                                </span>
+                            )}
+
                             <button
                                 className="btn btn-danger"
                                 type="button"
                                 onClick={() => rollD20('sleight of hands', abilities.dexterity, setRecentRolls, skillPro.sleightHands, lvl)}
                             >Sleight of Hands
                             </button>
+                            {isEditing ? (
+                                <label className="proficiency_control">
+                                    <input
+                                        type="checkbox"
+                                        checked={draft.skillPro.sleightHands === 1}
+                                        onChange={(event) => 
+                                            setDraft((currentDraft) => ({
+                                                ...currentDraft,
+                                                skillPro: {
+                                                    ...currentDraft.skillPro,
+                                                    sleightHands: event.target.checked ? 1 : 0,
+                                                },
+                                            }))
+                                        }
+                                />
+                                Proficient
+                                </label>
+                            ) : (
+                                <span
+                                    className='proficiency_marker'
+                                    aria-label={
+                                        skillPro.sleightHands === 1 ? 'Proficient' : 'Not proficient'
+                                    }
+                                    title={skillPro.sleightHands === 1 ? 'Proficient' : 'Not proficient'}
+                                >
+                                    {skillPro.sleightHands == 1 ? '✓' : '—'}
+                                </span>
+                            )}
+
                             <button
                                 className="btn btn-danger"
                                 type="button"
                                 onClick={() => rollD20('stealth', abilities.dexterity, setRecentRolls, skillPro.stealth, lvl)}
                             >Stealth
                             </button>
+                            {isEditing ? (
+                                <label className="proficiency_control">
+                                    <input
+                                        type="checkbox"
+                                        checked={draft.skillPro.stealth === 1}
+                                        onChange={(event) => 
+                                            setDraft((currentDraft) => ({
+                                                ...currentDraft,
+                                                skillPro: {
+                                                    ...currentDraft.skillPro,
+                                                    stealth: event.target.checked ? 1 : 0,
+                                                },
+                                            }))
+                                        }
+                                />
+                                Proficient
+                                </label>
+                            ) : (
+                                <span
+                                    className='proficiency_marker'
+                                    aria-label={
+                                        skillPro.stealth === 1 ? 'Proficient' : 'Not proficient'
+                                    }
+                                    title={skillPro.stealth === 1 ? 'Proficient' : 'Not proficient'}
+                                >
+                                    {skillPro.stealth == 1 ? '✓' : '—'}
+                                </span>
+                            )}
+
                             <button
                                 className="btn btn-danger"
                                 type="button"
                                 onClick={() => rollD20('survival', abilities.wisdom, setRecentRolls, skillPro.survival, lvl)}
                             >Survival
                             </button>
+                            {isEditing ? (
+                                <label className="proficiency_control">
+                                    <input
+                                        type="checkbox"
+                                        checked={draft.skillPro.survival === 1}
+                                        onChange={(event) => 
+                                            setDraft((currentDraft) => ({
+                                                ...currentDraft,
+                                                skillPro: {
+                                                    ...currentDraft.skillPro,
+                                                    survival: event.target.checked ? 1 : 0,
+                                                },
+                                            }))
+                                        }
+                                />
+                                Proficient
+                                </label>
+                            ) : (
+                                <span
+                                    className='proficiency_marker'
+                                    aria-label={
+                                        skillPro.survival === 1 ? 'Proficient' : 'Not proficient'
+                                    }
+                                    title={skillPro.survival === 1 ? 'Proficient' : 'Not proficient'}
+                                >
+                                    {skillPro.survival == 1 ? '✓' : '—'}
+                                </span>
+                            )}
+
+
                         </div>
                     </div>
                 </section>
