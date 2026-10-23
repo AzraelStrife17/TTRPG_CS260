@@ -151,12 +151,16 @@ export default function Charactersheet() {
     const [isEditing, setIsEditing] = useState(false);
     const [draft, setDraft] = useState(null);
 
+    const [portrait, setPortrait] = useState('/dr.tofu.png');
+    const [portraitError, setPortraitError] = useState('');
+
     function startEditing() {
         setDraft({
             lvl,
             abilities: { ...abilities },
             skillPro: { ...skillPro },
             savePro: { ...savePro },
+            portrait,
         });
         setIsEditing(true)
     }
@@ -164,7 +168,6 @@ export default function Charactersheet() {
     function saveEdits() {
         if (!draft) return;
 
-        setHp(draft.hp);
         setLvl(draft.lvl);
         setAbilities(draft.abilities);
         setSkillPro(draft.skillPro);
@@ -178,6 +181,43 @@ export default function Charactersheet() {
     function cancelEditing() {
         setIsEditing(false);
         setDraft(null);
+    }
+
+    function handlePortraitChange(event) {
+        const file = event.target.files[0];
+
+        if (!file) return;
+
+        if (!file.type.startsWith('image/')) {
+            setPortraitError('Choose an image file.');
+            return;
+        }
+
+        if (file.size > 5 * 1024 * 1024){
+            setPortraitError('Choose an image smaller than 5 MB.')
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = () => {
+            if (typeof reader.result !== 'string') {
+                setPortraitError('Could not load that image.');
+                return;
+            }
+
+            setDraft((currentDraft) => ({
+                ...currentDraft,
+                portrait: reader.result,
+            }));
+            setPortraitError('');
+        };
+
+        reader.onerror = () => {
+            setPortraitError('Could not read that image file.');
+        };
+
+        reader.readAsDataURL(file);
     }
 
     return (
@@ -218,7 +258,24 @@ export default function Charactersheet() {
                 </section>
 
                 <section className="portrait_section">
-                    <img className="portrait" src="/dr.tofu.png" alt="Dr. Tofu" width="100" height="200" />
+                    <img className="portrait" 
+                        src={isEditing && draft ? draft.portrait : portrait}
+                        alt="Character Portrait" 
+                        width="100" 
+                        height="200" 
+                    />
+                    {isEditing && (
+                        <div className="portrait_upload">
+                            <label htmlFor="portrait-upload">Change Portrait</label>
+                            <input
+                                id="portrait-upload"
+                                type="file"
+                                accept="image/*"
+                                onChange={handlePortraitChange}
+                            />
+                            {portraitError && <p role="alert">{portraitError}</p>}
+                        </div>
+                    )}
                 </section>
             </div>
 
@@ -1349,8 +1406,8 @@ export default function Charactersheet() {
                                 <li key={roll.id}>
                                     {roll.ability}: d20 ({roll.dieRoll}){' '}
                                     {roll.modifier >= 0 ? '+' : '-'}{' '}
-                                    {roll.proBonus > 0 && <>{roll.proBonus} {' '} +</>}{' '}
-                                    {Math.abs(roll.modifier) + ' = '}
+                                    {Math.abs(roll.modifier)}
+                                    {roll.proBonus > 0 && <> {' + '}{roll.proBonus}</>}{' = '}
                                     {roll.total}
                                 </li>
                             ))}
