@@ -183,6 +183,7 @@ export default function Charactersheet() {
         setAbilities(draft.abilities);
         setSkillPro(draft.skillPro);
         setSavePro(draft.savePro);
+        setPortrait(draft.portrait);
 
 
         setIsEditing(false);
@@ -549,7 +550,7 @@ export default function Charactersheet() {
                                         setDraft((currentDraft) => ({
                                             ...currentDraft,
                                             savePro: {
-                                                ...currentDraft.skillPro,
+                                                ...currentDraft.savePro,
                                                 strength: event.target.checked ? 1 : 0,
                                             },
                                         }))
@@ -584,7 +585,7 @@ export default function Charactersheet() {
                                         setDraft((currentDraft) => ({
                                             ...currentDraft,
                                             savePro: {
-                                                ...currentDraft.skillPro,
+                                                ...currentDraft.savePro,
                                                 dexterity: event.target.checked ? 1 : 0,
                                             },
                                         }))
@@ -620,7 +621,7 @@ export default function Charactersheet() {
                                         setDraft((currentDraft) => ({
                                             ...currentDraft,
                                             savePro: {
-                                                ...currentDraft.skillPro,
+                                                ...currentDraft.savePro,
                                                 constitution: event.target.checked ? 1 : 0,
                                             },
                                         }))
@@ -655,7 +656,7 @@ export default function Charactersheet() {
                                         setDraft((currentDraft) => ({
                                             ...currentDraft,
                                             savePro: {
-                                                ...currentDraft.skillPro,
+                                                ...currentDraft.savePro,
                                                 intelligence: event.target.checked ? 1 : 0,
                                             },
                                         }))
@@ -691,7 +692,7 @@ export default function Charactersheet() {
                                         setDraft((currentDraft) => ({
                                             ...currentDraft,
                                             savePro: {
-                                                ...currentDraft.skillPro,
+                                                ...currentDraft.savePro,
                                                 wisdom: event.target.checked ? 1 : 0,
                                             },
                                         }))
@@ -727,7 +728,7 @@ export default function Charactersheet() {
                                         setDraft((currentDraft) => ({
                                             ...currentDraft,
                                             savePro: {
-                                                ...currentDraft.skillPro,
+                                                ...currentDraft.savePro,
                                                 charisma: event.target.checked ? 1 : 0,
                                             },
                                         }))
