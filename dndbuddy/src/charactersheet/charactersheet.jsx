@@ -102,6 +102,17 @@ function mockBonus(setRecentRolls, intelligenceScore) {
 
 }
 
+function healthChange(hp, setRecentRolls) {
+    setRecentRolls((currentRolls) => [
+        {
+            id: crypto.randomUUID(),
+            type: 'health',
+            hp,
+        },
+        ...currentRolls,
+    ].slice(0, 5));
+}
+
 export default function Charactersheet() {
     const [hp, setHp] = useState(24);
     const [lvl, setLvl] = useState(1)
@@ -193,7 +204,7 @@ export default function Charactersheet() {
             return;
         }
 
-        if (file.size > 5 * 1024 * 1024){
+        if (file.size > 5 * 1024 * 1024) {
             setPortraitError('Choose an image smaller than 5 MB.')
             return;
         }
@@ -239,7 +250,7 @@ export default function Charactersheet() {
                                 }
                             />
                         ) : (
-                            <span>{lvl}</span>
+                            <span className='lvl_value'>{lvl}</span>
                         )}
 
                     </div>
@@ -248,9 +259,11 @@ export default function Charactersheet() {
                         <input
                             id="hp"
                             type="number"
-                            placeholder='1'
-                            min="0"
-                            max="565"
+                            value={hp}
+                            min={0}
+                            onChange={(event) => setHp(Number(event.target.value))}
+                            onBlur={() => healthChange(hp, setRecentRolls)}
+                            
                         />
                     </div>
 
@@ -258,11 +271,11 @@ export default function Charactersheet() {
                 </section>
 
                 <section className="portrait_section">
-                    <img className="portrait" 
+                    <img className="portrait"
                         src={isEditing && draft ? draft.portrait : portrait}
-                        alt="Character Portrait" 
-                        width="100" 
-                        height="200" 
+                        alt="Character Portrait"
+                        width="100"
+                        height="200"
                     />
                     {isEditing && (
                         <div className="portrait_upload">
@@ -1402,13 +1415,20 @@ export default function Charactersheet() {
                     <div className="real_time_actions_text">
                         <p>Live Rolls displayed here (Websocket Placeholder)</p>
                         <ul>
-                            {recentRolls.map((roll) => (
-                                <li key={roll.id}>
-                                    {roll.ability}: d20 ({roll.dieRoll}){' '}
-                                    {roll.modifier >= 0 ? '+' : '-'}{' '}
-                                    {Math.abs(roll.modifier)}
-                                    {roll.proBonus > 0 && <> {' + '}{roll.proBonus}</>}{' = '}
-                                    {roll.total}
+                            {recentRolls.map((entry) => (
+                                <li key={entry.id}>
+                                    {entry.type === 'health' ? (
+                                        <>HP changed to {entry.hp}</>
+                                    ) : (
+                                        <>
+                                            {entry.ability}: d20 ({entry.dieRoll}){' '}
+                                            {entry.modifier >= 0 ? '+' : '-'}{' '}
+                                            {Math.abs(entry.modifier)}
+                                            {entry.proBonus > 0 && <> {' + '}{entry.proBonus}</>}
+                                            {' = '}
+                                            {entry.total}
+                                        </>
+                                    )}
                                 </li>
                             ))}
                         </ul>

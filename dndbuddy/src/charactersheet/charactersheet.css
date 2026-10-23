@@ -33,7 +33,9 @@ main h1 {
     background: none;
     border: none;
     color: #f0e5cc;
-    font-size: 25px;
+    font-size: 1.5rem;
+    width: 4rem;
+    box-sizing: border-box;
 }
 
 #lvl {
@@ -41,8 +43,9 @@ main h1 {
     background: none;
     border: none;
     color: #f0e5cc;
-    font-size: 25px;
-    width: 3.5rem;
+    font-size: 1.5rem;
+    width: 4rem;
+    box-sizing: border-box;
 }
 
 label[for="hp"]{
@@ -57,7 +60,13 @@ label[for="hp"]{
 }
 
 label[for="lvl"] {
-    font-size: 25px;
+    font-size: 1.5rem;
+}
+
+.lvl_value {
+    font-family: "Cinzel", Georgia, serif;
+    color: #f0e5cc;
+    font-size: 1.5rem;
 }
 
 #ac {
