@@ -1,10 +1,32 @@
 import { Link } from 'react-router-dom';
 import './dashboard.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+function loadStoredList(key) {
+  try {
+    const storedValue = window.localStorage.getItem(key);
+
+    if (storedValue === null) {
+      return [];
+    }
+
+    const parsedValue = JSON.parse(storedValue);
+
+    if (!Array.isArray(parsedValue)) {
+      throw new Error('Saved value for ${key} is not a list.');
+    }
+
+    return parsedValue
+  }
+  catch(error){
+    console.error('Could not load ${key} from localStorage.', error);
+    return [];
+  }
+}
 
 export default function Dashboard() {
-  const [characters, setCharacters] = useState([])
-  const [campaigns, setCampaigns] = useState([])
+  const [characters, setCharacters] = useState(() => loadStoredList('dndbuddy.characters'));
+  const [campaigns, setCampaigns] = useState(() => loadStoredList('dndbuddy.campaigns'))
 
   const [newName, setNewName] = useState('');
   const [newLevel, setNewLevel] = useState(1);
@@ -16,6 +38,30 @@ export default function Dashboard() {
 
   const [joinCode, setJoinCode] = useState('');
   const [joinCharacterId, setJoinCharacterId] = useState('');
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(
+        'dndbuddy.characters',
+        JSON.stringify(characters)
+      );
+    }
+    catch (error) {
+      console.error('Could not save characters to localStorage', error);
+    }
+  }, [characters]);
+
+  useEffect(() => {
+    try{
+      window.localStorage.setItem(
+        'dndbuddy.campaigns',
+        JSON.stringify(campaigns)
+      );
+    }
+    catch (error) {
+      console.error('Could not save campaigns to localStorage', error);
+    }
+  }, [campaigns]);
 
   function handleCreateCharacter(event) {
     event.preventDefault();
@@ -59,12 +105,12 @@ export default function Dashboard() {
 
     const code = newCode.trim();
 
-    if (!code){
+    if (!code) {
       setCodeError('Enter Campaign Code')
       return;
     }
 
-    if (campaigns.some((c) => c.code.toLowerCase() === code.toLowerCase())){
+    if (campaigns.some((c) => c.code.toLowerCase() === code.toLowerCase())) {
       setCodeError('Code already exists');
       return;
     }
@@ -84,7 +130,7 @@ export default function Dashboard() {
 
   }
 
-  function handleJoin(){
+  function handleJoin() {
     const campaign = campaigns.find(
       (c) => c.code.toLowerCase() === joinCode.trim().toLowerCase()
     );
@@ -94,20 +140,20 @@ export default function Dashboard() {
 
     setCampaigns((currentCampaigns) =>
       currentCampaigns.map((c) =>
-        c.id === campaign.id ? { ...c, character: character.name} : c
+        c.id === campaign.id ? { ...c, character: character.name } : c
       )
     );
   }
 
-  function handleLeave(campaignId){
+  function handleLeave(campaignId) {
     setCampaigns((currentCampaigns) =>
       currentCampaigns.flatMap((campaign) => {
 
-        if (campaign.id !== campaignId){
+        if (campaign.id !== campaignId) {
           return [campaign];
         }
-        if (campaign.otherPlayers > 0){
-          return [{ ...campaign, character: ''}];
+        if (campaign.otherPlayers > 0) {
+          return [{ ...campaign, character: '' }];
         }
 
         return [];
@@ -186,19 +232,19 @@ export default function Dashboard() {
           <h2>Join Campaign</h2>
           <form>
             <label htmlFor="campaign_code">Campaign Code:</label>
-            <input 
-              id="campaign_code" 
-              type="text" 
-              placeholder="Enter Campaign Code Here" 
+            <input
+              id="campaign_code"
+              type="text"
+              placeholder="Enter Campaign Code Here"
               maxLength={10}
               value={joinCode}
               onChange={(event) => setJoinCode(event.target.value)}
             />
-            <select 
-              className="select_character" 
+            <select
+              className="select_character"
               id="character_select"
               value={joinCharacterId}
-              onChange={(event) => setJoinCharacterId(event.target.value)} 
+              onChange={(event) => setJoinCharacterId(event.target.value)}
               disabled={characters.length === 0}
             >
               <option value="">Select a Character</option>
@@ -214,13 +260,13 @@ export default function Dashboard() {
           <h2>Create Campaign Code</h2>
           <form onSubmit={handleCreateCode}>
             <label htmlFor="create_campaign_code">Create Code:</label>
-            <input 
-              id="create_campaign_code" 
-              type="text" 
-              placeholder="Enter Campaign Code Here" 
+            <input
+              id="create_campaign_code"
+              type="text"
+              placeholder="Enter Campaign Code Here"
               maxLength={10}
               value={newCode}
-              onChange={(event) => setNewCode(event.target.value)}  
+              onChange={(event) => setNewCode(event.target.value)}
             />
             <button className="btn btn-danger" type="submit">Create</button>
             {codeError && <p role="alert">{codeError}</p>}
