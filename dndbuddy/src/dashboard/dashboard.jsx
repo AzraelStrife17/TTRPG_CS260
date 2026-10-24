@@ -5,6 +5,43 @@ import { useState } from 'react';
 export default function Dashboard() {
   const [characters, setCharacters] = useState([])
   const [campaigns, setCampaigns] = useState([])
+  const [newName, setNewName] = useState('');
+  const [newLevel, setNewLevel] = useState(1);
+  const [newClass, setNewClass] = useState('');
+  const [createError, setCreateError] = useState('');
+
+  function handleCreateCharacter(event){
+  event.preventDefault();
+
+  const name = newName.trim();
+  const className = newClass.trim();
+
+  if (!name || ! className){
+    setCreateError('Enter a name and a class');
+    return;
+  }
+
+  if (characters.some((c) => c.name.toLowerCase() === name.toLowerCase())){
+    setCreateError('Already have a character with that name.');
+    return;
+  }
+
+  setCharacters((currentCharacters) => [
+    ...currentCharacters,
+    {
+      id: crypto.randomUUID(),
+      name,
+      level: newLevel,
+      className,
+    },
+  ]);
+
+  setNewName('');
+  setNewLevel(1);
+  setNewClass('');
+  setCreateError('');
+
+}
 
   return (
     <main>
@@ -39,9 +76,36 @@ export default function Dashboard() {
             </table>
           </div>
 
-          <Link className="btn btn-danger" to="/charactersheet">
-            Create Character
-          </Link>
+          <form onSubmit={handleCreateCharacter}>
+            <label htmlFor="new_name">Name:</label>
+            <input
+              id="new_name"
+              type="text"
+              value={newName}
+              onChange={(event) => setNewName(event.target.value)}
+            />
+
+            <label htmlFor="new_class">Class:</label>
+            <input
+              id="new_class"
+              type="text"
+              value={newClass}
+              onChange={(event) => setNewClass(event.target.value)}
+            />
+
+            <label htmlFor="new_level">Level:</label>
+            <input
+              id="new_level"
+              type="number"
+              min="1"
+              max="20"
+              value={newLevel}
+              onChange={(event) => setNewLevel(Number(event.target.value))}
+            />
+
+            <button className="btn btn-danger" type="submit">Create Character</button>
+            {createError && <p role="alert">{createError}</p>}
+          </form>
         </section>
 
         <section className="campaign_join_create">
