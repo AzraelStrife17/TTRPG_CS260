@@ -109,9 +109,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [X] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [X] **All functionality implemented or mocked out** - Implemented dice rolls, creating characters, creating campaigns, editing character sheet, mocked out websocket calls by having recent actions appear when makign a die roll or changing health.
+- [X] **Hooks** - Used useState to manage interactive data such as characters, campaigns, login state, and character-sheet values, so the UI updates when those values change. Used useEffect to save character and campaign data to localStorage, so it remains after a page refresh in the same browser.
 
 ## 🚀 Service deliverable
 
