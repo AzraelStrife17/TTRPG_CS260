@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
 import './dashboard.css';
 import { useEffect, useState } from 'react';
+import {
+  createCharacterRecord,
+  loadCharacters,
+  saveCharacters
+} from '../data/characterStorage.js';
 
 function loadStoredList(key) {
   try {
@@ -25,7 +30,7 @@ function loadStoredList(key) {
 }
 
 export default function Dashboard() {
-  const [characters, setCharacters] = useState(() => loadStoredList('dndbuddy.characters'));
+  const [characters, setCharacters] = useState(loadCharacters);
   const [campaigns, setCampaigns] = useState(() => loadStoredList('dndbuddy.campaigns'))
 
   const [newName, setNewName] = useState('');
@@ -86,12 +91,12 @@ export default function Dashboard() {
 
     setCharacters((currentCharacters) => [
       ...currentCharacters,
-      {
+      createCharacterRecord({
         id: crypto.randomUUID(),
         name,
         level: newLevel,
         className,
-      },
+      }),
     ]);
 
     setNewName('');
@@ -184,7 +189,7 @@ export default function Dashboard() {
                 ) : (
                   characters.map((character) => (
                     <tr key={character.id}>
-                      <td><Link to="/charactersheet">{character.name}</Link></td>
+                      <td><Link to={`/charactersheet/${character.id}`}>{character.name}</Link></td>
                       <td>{character.level}</td>
                       <td>{character.className}</td>
                     </tr>

@@ -36,7 +36,7 @@ export default function App() {
         <Route path='/' element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/charactersheet" element={<CharacterSheet />} />
+        <Route path="/charactersheet/:characterId" element={<CharacterSheet />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -1,5 +1,7 @@
 import './charactersheet.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { loadCharacters, saveCharacters } from '../data/characterStorage.js';
 
 function getAbilityModifier(score) {
     return Math.floor((score - 10) / 2)
@@ -113,57 +115,114 @@ function healthChange(hp, setRecentRolls) {
     ].slice(0, 5));
 }
 
-export default function Charactersheet() {
-    const [hp, setHp] = useState(24);
-    const [lvl, setLvl] = useState(1)
+export default function CharacterSheetRoute() {
+    const { characterId } = useParams();
 
-    const [abilities, setAbilities] = useState({
-        strength: 1,
-        dexterity: 1,
-        constitution: 1,
-        intelligence: 1,
-        wisdom: 1,
-        charisma: 1,
-    });
+    return <Charactersheet key={characterId} characterId={characterId} />;
+}
 
-    const [savePro, setSavePro] = useState({
-        strength: 0,
-        dexterity: 0,
-        constitution: 0,
-        intelligence: 0,
-        wisdom: 0,
-        charisma: 0,
+function Charactersheet({ characterId }) {
+    const [initialCharacter] = useState(
+        () => loadCharacters().find((character) => character.id === characterId) ?? null
+    );
 
-    });
+    const [hp, setHp] = useState(initialCharacter?.hp ?? 1);
+    const [lvl, setLvl] = useState(initialCharacter?.level ?? 1);
 
-    const [skillPro, setSkillPro] = useState({
-        acrobatics: 0,
-        animalHandling: 0,
-        arcana: 0,
-        athletics: 0,
-        deception: 0,
-        history: 0,
-        insight: 0,
-        intimidation: 0,
-        investigation: 0,
-        medicine: 0,
-        nature: 0,
-        perception: 0,
-        performance: 0,
-        persuasion: 0,
-        religion: 0,
-        sleightHands: 0,
-        stealth: 0,
-        survival: 0,
-    });
+    const [abilities, setAbilities] = useState(
+        initialCharacter?.abilities ?? {
+            strength: 1,
+            dexterity: 1,
+            constitution: 1,
+            intelligence: 1,
+            wisdom: 1,
+            charisma: 1,
+        }
+    );
+
+    const [savePro, setSavePro] = useState(
+        initialCharacter?.savePro ?? {
+            strength: 0,
+            dexterity: 0,
+            constitution: 0,
+            intelligence: 0,
+            wisdom: 0,
+            charisma: 0,
+        }
+    );
+
+    const [skillPro, setSkillPro] = useState(
+        initialCharacter?.skillPro ?? {
+            acrobatics: 0,
+            animalHandling: 0,
+            arcana: 0,
+            athletics: 0,
+            deception: 0,
+            history: 0,
+            insight: 0,
+            intimidation: 0,
+            investigation: 0,
+            medicine: 0,
+            nature: 0,
+            perception: 0,
+            performance: 0,
+            persuasion: 0,
+            religion: 0,
+            sleightHands: 0,
+            stealth: 0,
+            survival: 0,
+        }
+    );
+
+
+    const [portrait, setPortrait] = useState(
+        initialCharacter?.portrait ?? '/dr.tofu.png'
+    );
+    const [portraitError, setPortraitError] = useState('');
+
+    useEffect(() => {
+        if (!initialCharacter) return;
+
+        const characters = loadCharacters();
+        let characterFound = false;
+
+        const updateCharacters = characters.map((character) => {
+            if (character.id !== characterId) return character;
+
+            characterFound = true;
+
+            return {
+                ...character,
+                hp,
+                level: lvl,
+                abilities,
+                savePro,
+                skillPro,
+                portrait,
+            };
+        });
+
+        if (!characterFound) {
+            console.error('Character ${characterId} was not found in localStorage');
+            return;
+        }
+
+        saveCharacters(updateCharacters);
+    }, [
+        characterId,
+        initialCharacter,
+        hp,
+        lvl,
+        abilities,
+        savePro,
+        skillPro,
+        portrait
+    ]);
 
     const [recentRolls, setRecentRolls] = useState([])
 
     const [isEditing, setIsEditing] = useState(false);
     const [draft, setDraft] = useState(null);
-
-    const [portrait, setPortrait] = useState('/dr.tofu.png');
-    const [portraitError, setPortraitError] = useState('');
 
     function startEditing() {
         setDraft({
@@ -264,7 +323,7 @@ export default function Charactersheet() {
                             min={0}
                             onChange={(event) => setHp(Number(event.target.value))}
                             onBlur={() => healthChange(hp, setRecentRolls)}
-                            
+
                         />
                     </div>
 
