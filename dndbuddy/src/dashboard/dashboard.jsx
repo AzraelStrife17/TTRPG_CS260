@@ -5,43 +5,80 @@ import { useState } from 'react';
 export default function Dashboard() {
   const [characters, setCharacters] = useState([])
   const [campaigns, setCampaigns] = useState([])
+
   const [newName, setNewName] = useState('');
   const [newLevel, setNewLevel] = useState(1);
   const [newClass, setNewClass] = useState('');
   const [createError, setCreateError] = useState('');
 
-  function handleCreateCharacter(event){
-  event.preventDefault();
+  const [newCode, setNewCode] = useState('');
+  const [codeError, setCodeError] = useState('');
 
-  const name = newName.trim();
-  const className = newClass.trim();
+  function handleCreateCharacter(event) {
+    event.preventDefault();
 
-  if (!name || ! className){
-    setCreateError('Enter a name and a class');
-    return;
+    const name = newName.trim();
+    const className = newClass.trim();
+
+    if (!name || !className) {
+      setCreateError('Enter a name and a class');
+      return;
+    }
+
+    if (characters.some((c) => c.name.toLowerCase() === name.toLowerCase())) {
+      setCreateError('Already have a character with that name.');
+      return;
+    }
+
+    if (name.length > 12) {
+      setCreateError('Name only 12 characters max')
+      return;
+    }
+
+    setCharacters((currentCharacters) => [
+      ...currentCharacters,
+      {
+        id: crypto.randomUUID(),
+        name,
+        level: newLevel,
+        className,
+      },
+    ]);
+
+    setNewName('');
+    setNewLevel(1);
+    setNewClass('');
+    setCreateError('');
   }
 
-  if (characters.some((c) => c.name.toLowerCase() === name.toLowerCase())){
-    setCreateError('Already have a character with that name.');
-    return;
+  function handleCreateCode(event) {
+    event.preventDefault();
+
+    const code = newCode.trim();
+
+    if (!code){
+      setCodeError('Enter Campaign Code')
+      return;
+    }
+
+    if (campaigns.some((c) => c.code.toLowerCase() === code.toLowerCase())){
+      setCodeError('Code already exists');
+      return;
+    }
+
+    setCampaigns((currentCampaigns) => [
+      ...currentCampaigns,
+      {
+        id: crypto.randomUUID,
+        code,
+        character: '',
+      },
+    ]);
+
+    setNewCode('');
+    setCodeError('');
+
   }
-
-  setCharacters((currentCharacters) => [
-    ...currentCharacters,
-    {
-      id: crypto.randomUUID(),
-      name,
-      level: newLevel,
-      className,
-    },
-  ]);
-
-  setNewName('');
-  setNewLevel(1);
-  setNewClass('');
-  setCreateError('');
-
-}
 
   return (
     <main>
@@ -71,7 +108,7 @@ export default function Dashboard() {
                       <td>{character.className}</td>
                     </tr>
                   ))
-              )}
+                )}
               </tbody>
             </table>
           </div>
@@ -81,6 +118,7 @@ export default function Dashboard() {
             <input
               id="new_name"
               type="text"
+              maxLength={12}
               value={newName}
               onChange={(event) => setNewName(event.target.value)}
             />
@@ -89,6 +127,7 @@ export default function Dashboard() {
             <input
               id="new_class"
               type="text"
+              maxLength={9}
               value={newClass}
               onChange={(event) => setNewClass(event.target.value)}
             />
@@ -112,7 +151,7 @@ export default function Dashboard() {
           <h2>Join Campaign</h2>
           <form>
             <label htmlFor="campaign_code">Campaign Code:</label>
-            <input id="campaign_code" type="text" placeholder="Enter Campaign Code Here"/>
+            <input id="campaign_code" type="text" placeholder="Enter Campaign Code Here" />
             <select className="select_character" id="character_select" disabled={characters.length === 0}>
               <option value="">Select a Character</option>
               {characters.map((character) => (
@@ -125,10 +164,17 @@ export default function Dashboard() {
           </form>
 
           <h2>Create Campaign Code</h2>
-          <form>
+          <form onSubmit={handleCreateCode}>
             <label htmlFor="create_campaign_code">Create Code:</label>
-            <input id="create_campaign_code" type="text" placeholder="Enter Campaign Code Here"/>
+            <input 
+              id="create_campaign_code" 
+              type="text" 
+              placeholder="Enter Campaign Code Here" 
+              value={newCode}
+              onChange={(event) => setNewCode(event.target.value)}  
+            />
             <button className="btn btn-danger" type="submit">Create</button>
+            {codeError && <p role="alert">{codeError}</p>}
           </form>
         </section>
 
@@ -150,11 +196,11 @@ export default function Dashboard() {
                   </tr>
                 ) : (
                   campaigns.map((campaign) => (
-                  <tr key={character.id}>
-                    <td>{character.name}</td>
-                    <td>{campaign.id}</td>
-                    <td><button type="button">Leave</button></td>
-                  </tr>
+                    <tr key={campaign.id}>
+                      <td>{campaign.character || 'Not assigned'}</td>
+                      <td>{campaign.code}</td>
+                      <td><button type="button">Leave</button></td>
+                    </tr>
                   ))
                 )}
               </tbody>
