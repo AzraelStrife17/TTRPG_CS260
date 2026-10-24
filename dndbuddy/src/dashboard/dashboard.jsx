@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
 import './dashboard.css';
+import { useState } from 'react';
 
 export default function Dashboard() {
+  const [characters, setCharacters] = useState([])
+  const [campaigns, setCampaigns] = useState([])
+
   return (
     <main>
       <div className="dashboard_sections">
@@ -18,23 +22,19 @@ export default function Dashboard() {
               </thead>
 
               <tbody>
-                <tr>
-                  <td><Link to ="/charactersheet">Anby</Link></td>
-                  <td>7</td>
-                  <td>Fighter</td>
-                </tr>
-
-                <tr>
-                  <td><Link to ="/charactersheet">Pyrois</Link></td>
-                  <td>19</td>
-                  <td>Warlock</td>
-                </tr>
-
-                <tr>
-                  <td><Link to ="/charactersheet">Dr.Tofu</Link></td>
-                  <td>20</td>
-                  <td>Paladin</td>
-                </tr>
+                {characters.length === 0 ? (
+                  <tr>
+                    <td colSpan="3">No Characters</td>
+                  </tr>
+                ) : (
+                  characters.map((character) => (
+                    <tr key={character.id}>
+                      <td><Link to="/charactersheet">{character.name}</Link></td>
+                      <td>{character.level}</td>
+                      <td>{character.className}</td>
+                    </tr>
+                  ))
+              )}
               </tbody>
             </table>
           </div>
@@ -49,11 +49,13 @@ export default function Dashboard() {
           <form>
             <label htmlFor="campaign_code">Campaign Code:</label>
             <input id="campaign_code" type="text" placeholder="Enter Campaign Code Here"/>
-            <select className="select_character" id="character_select">
+            <select className="select_character" id="character_select" disabled={characters.length === 0}>
               <option value="">Select a Character</option>
-              <option value="anby">Anby</option>
-              <option value="dr_tofu">Dr. Tofu</option>
-              <option value="pyrois">Pyrois</option>
+              {characters.map((character) => (
+                <option key={character.id} value={character.id}>
+                  {character.name}
+                </option>
+              ))}
             </select>
             <button className="btn btn-danger" type="button">Join</button>
           </form>
@@ -78,11 +80,19 @@ export default function Dashboard() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Anby</td>
-                  <td>SecretCode</td>
-                  <td><button type="button">Leave</button></td>
-                </tr>
+                {campaigns.length === 0 ? (
+                  <tr>
+                    <td colSpan="3">No Campaigns</td>
+                  </tr>
+                ) : (
+                  campaigns.map((campaign) => (
+                  <tr key={character.id}>
+                    <td>{character.name}</td>
+                    <td>{campaign.id}</td>
+                    <td><button type="button">Leave</button></td>
+                  </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
