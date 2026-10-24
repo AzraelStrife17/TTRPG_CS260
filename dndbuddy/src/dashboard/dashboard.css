@@ -134,3 +134,42 @@ main {
     background: rgb(100, 76, 76);
     font-family: "Cinzel", Georgia, serif;
 }
+
+.create_character_form {
+    display: grid;
+    gap: 0.5rem;
+    max-width: 20rem;
+    margin-top: 1rem;
+}
+
+.create_character_form label {
+    font-size: 1rem;
+}
+
+.create_character_form input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid rgb(104, 1, 1);
+    border-radius: 0.25rem;
+    background: linear-gradient(rgb(100, 76, 76), rgb(48, 28, 28));
+    color: #f0e5cc;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 1rem;
+}
+
+.create_character_form input:focus {
+    outline: 2px solid #c49a58;
+    outline-offset: 2px;
+}
+
+.create_character_form button {
+    justify-self: start;
+    margin-top: 0.5rem;
+}
+
+.create_character_form [role="alert"] {
+    margin: 0;
+    color: #ffb3a7;
+    font-size: 1rem;
+}

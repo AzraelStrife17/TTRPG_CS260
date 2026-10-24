@@ -75,6 +75,7 @@ export default function Dashboard() {
         id: crypto.randomUUID(),
         code,
         character: '',
+        otherPlayers: 0,
       },
     ]);
 
@@ -95,6 +96,22 @@ export default function Dashboard() {
       currentCampaigns.map((c) =>
         c.id === campaign.id ? { ...c, character: character.name} : c
       )
+    );
+  }
+
+  function handleLeave(campaignId){
+    setCampaigns((currentCampaigns) =>
+      currentCampaigns.flatMap((campaign) => {
+
+        if (campaign.id !== campaignId){
+          return [campaign];
+        }
+        if (campaign.otherPlayers > 0){
+          return [{ ...campaign, character: ''}];
+        }
+
+        return [];
+      })
     );
   }
 
@@ -131,7 +148,7 @@ export default function Dashboard() {
             </table>
           </div>
 
-          <form onSubmit={handleCreateCharacter}>
+          <form className="create_character_form" onSubmit={handleCreateCharacter}>
             <label htmlFor="new_name">Name:</label>
             <input
               id="new_name"
@@ -231,7 +248,7 @@ export default function Dashboard() {
                     <tr key={campaign.id}>
                       <td>{campaign.character || 'Not assigned'}</td>
                       <td>{campaign.code}</td>
-                      <td><button type="button">Leave</button></td>
+                      <td><button type="button" onClick={() => handleLeave(campaign.id)}>Leave</button></td>
                     </tr>
                   ))
                 )}
