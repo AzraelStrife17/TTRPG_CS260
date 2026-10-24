@@ -14,6 +14,9 @@ export default function Dashboard() {
   const [newCode, setNewCode] = useState('');
   const [codeError, setCodeError] = useState('');
 
+  const [joinCode, setJoinCode] = useState('');
+  const [joinCharacterId, setJoinCharacterId] = useState('');
+
   function handleCreateCharacter(event) {
     event.preventDefault();
 
@@ -69,7 +72,7 @@ export default function Dashboard() {
     setCampaigns((currentCampaigns) => [
       ...currentCampaigns,
       {
-        id: crypto.randomUUID,
+        id: crypto.randomUUID(),
         code,
         character: '',
       },
@@ -78,6 +81,21 @@ export default function Dashboard() {
     setNewCode('');
     setCodeError('');
 
+  }
+
+  function handleJoin(){
+    const campaign = campaigns.find(
+      (c) => c.code.toLowerCase() === joinCode.trim().toLowerCase()
+    );
+    const character = characters.find((c) => c.id === joinCharacterId);
+
+    if (!campaign || !character) return;
+
+    setCampaigns((currentCampaigns) =>
+      currentCampaigns.map((c) =>
+        c.id === campaign.id ? { ...c, character: character.name} : c
+      )
+    );
   }
 
   return (
@@ -151,8 +169,21 @@ export default function Dashboard() {
           <h2>Join Campaign</h2>
           <form>
             <label htmlFor="campaign_code">Campaign Code:</label>
-            <input id="campaign_code" type="text" placeholder="Enter Campaign Code Here" />
-            <select className="select_character" id="character_select" disabled={characters.length === 0}>
+            <input 
+              id="campaign_code" 
+              type="text" 
+              placeholder="Enter Campaign Code Here" 
+              maxLength={10}
+              value={joinCode}
+              onChange={(event) => setJoinCode(event.target.value)}
+            />
+            <select 
+              className="select_character" 
+              id="character_select"
+              value={joinCharacterId}
+              onChange={(event) => setJoinCharacterId(event.target.value)} 
+              disabled={characters.length === 0}
+            >
               <option value="">Select a Character</option>
               {characters.map((character) => (
                 <option key={character.id} value={character.id}>
@@ -160,7 +191,7 @@ export default function Dashboard() {
                 </option>
               ))}
             </select>
-            <button className="btn btn-danger" type="button">Join</button>
+            <button className="btn btn-danger" type="button" onClick={handleJoin}>Join</button>
           </form>
 
           <h2>Create Campaign Code</h2>
@@ -170,6 +201,7 @@ export default function Dashboard() {
               id="create_campaign_code" 
               type="text" 
               placeholder="Enter Campaign Code Here" 
+              maxLength={10}
               value={newCode}
               onChange={(event) => setNewCode(event.target.value)}  
             />
