@@ -57,6 +57,7 @@ apiRouter.delete('/auth/logout', async (req, res) => {
 const verifyAuth = async (req, res, next) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
+    req.user = user
     next();
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
@@ -64,7 +65,11 @@ const verifyAuth = async (req, res, next) => {
 };
 
 apiRouter.get('/characters', verifyAuth, (_req, res) => {
-    res.send(characters)
+    const userCharacters = characters.filter(
+        (character) => character.ownerId === req.user.id
+    );
+
+    res.send(userCharacters)
 })
 
 apiRouter.post('/characters', verifyAuth, (req, res) => {
@@ -73,28 +78,61 @@ apiRouter.post('/characters', verifyAuth, (req, res) => {
     if (!character || typeof character.id !== 'string' || !character.id){
         return res.status(400).send({msg: 'Character must include id'});
     }
-    res.send(updateCharacters(character));
+    res.send(updateCharacters(req.body, req.user.id));
 });
 
-function updateCharacters(newCharacter) {
+apiRouter.delete('/characters/:id', verifyAuth, (req, res) => {
+    const deleted = deleteCharacters(req.params.id, req.user.id);
+
+    if (!deleted) {
+        return res.status(404).send({msg: 'Character not found'})
+    }
+    
+    res.status(204).end();
+}
+)
+
+function updateCharacters(newCharacter, ownerId) {
     const index = characters.findIndex(
-        (character) => character.id === newCharacter.id
+        (character) => 
+            character.id === newCharacter.id &&
+            character.ownerId === ownerId
     );
 
     if (index === -1){
-        characters.push(newCharacter);
+        characters.push({... newCharacter, ownerId});
     }
     else{
-        characters[index] = { ...characters[index], ...newCharacter};
+        characters[index] = {
+            ...characters[index],
+            ...newCharacter,
+            ownerId,
+        };
     }
 
-    return characters;
+    return characters.filter((character) => character.ownerId === ownerId);
+}
+
+function deleteCharacters(characterId, ownerId){
+    const index = characters.findIndex(
+        (character) => 
+            character.id === characterId &&
+            character.ownerId === ownerId
+    );
+
+    if (index === -1){
+        return false;
+    }
+
+    characters.splice(index, 1);
+    return true;
 }
 
 async function createUser(email, password) {
   const passwordHash = await bcrypt.hash(password, 10);
 
   const user = {
+    id: uuid.v4(),
     email: email,
     password: passwordHash,
     token: uuid.v4(),
