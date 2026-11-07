@@ -1,11 +1,10 @@
-import { NavLink, Route, Routes, useLocation } from 'react-router-dom';
-
 import Dashboard from './dashboard/dashboard.jsx';
 import CharacterSheet from './charactersheet/charactersheet.jsx';
 import About from './about/about.jsx';
 import Login from './login/login.jsx';
 import './app.css';
 import {useState} from 'react';
+import {NavLink, Route, Routes, useLocation, useNavigate} from 'react-router-dom';
 
 function loadMockUser() {
   try {
@@ -27,6 +26,9 @@ export default function App() {
 
   const [user, setUser] = useState(loadMockUser);
 
+  const navigate = useNavigate();
+  const [logoutError, setLogoutError] = useState('');
+
   function handleLogin(email) {
     const mockUser = {email};
     try{
@@ -40,13 +42,26 @@ export default function App() {
     }
   }
 
-  function handleLogout(){
+  async function handleLogout(event){
+    event.preventDefault();
+    setLogoutError('');
+
     try {
+      const response = await fetch('/api/auth/logout', {
+        method: 'Delete',
+      });
+
+      if (!response.ok){
+        setLogoutError('Could not logout in. Please try again.');
+        return;
+      }
       window.localStorage.removeItem('dndbuddy.user');
       setUser(null);
+      navigate('/login');
     }
     catch (error){
       console.error('Could not clear the mock user session', error);
+      setLogoutError('Could not log out. Please try again.');
     }
   }
 
@@ -67,6 +82,7 @@ export default function App() {
             )}
           </menu>
         </nav>
+        {logoutError && <p role="alert">{logoutError}</p>}
 
         {showLoggedIn && user && <p>{user.email} logged in</p>}
       </header>

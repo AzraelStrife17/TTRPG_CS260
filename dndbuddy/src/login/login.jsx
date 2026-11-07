@@ -7,7 +7,7 @@ export default function Login({onLogin}) {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
         setError('');
 
@@ -18,12 +18,38 @@ export default function Login({onLogin}) {
             return;
         }
         
-        if (!onLogin(normalizedEmail)){
-            setError('Could not save the mock login. Please try again');
-            return;
-        }
+        const action = event.nativeEvent.submitter.value;
 
-        navigate('/dashboard');
+        try{
+            const response = await fetch(`/api/auth/${action}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: normalizedEmail,
+                    password,
+                }),
+            });
+
+            const result = await response.json();
+
+            if (!response.ok){
+                setError(result.msg || 'Could not log in. Please try again.');
+                return;
+            }
+
+            if (!onLogin(result.email)){
+                setError('Logged in, but could not save local session.');
+                return;
+            }
+
+            navigate('/dashboard');
+        }
+        catch (error){
+            console.error('Authentication failed:', error);
+            setError('Could not reach service try again')
+        }
     }
 
     return (
@@ -53,8 +79,9 @@ export default function Login({onLogin}) {
                         />
                     </div>
 
-                    <button type="submit">Login</button>
-                    <button type="submit">Create</button>
+                    <button type="submit" value="login">Login</button>
+                    <button type="submit" value="create">Create</button>
+                    {error && <p role="alert">{error}</p>}
                 </form>
             </div>
         </main>
