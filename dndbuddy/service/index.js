@@ -99,6 +99,7 @@ apiRouter.get('/campaigns', verifyAuth, (req, res) => {
   res.send(userCampaigns)
 })
 
+
 apiRouter.post('/campaigns', verifyAuth, (req, res) => {
   const code = typeof req.body.code === 'string' ? req.body.code.trim() : '';
 
@@ -116,6 +117,38 @@ apiRouter.post('/campaigns', verifyAuth, (req, res) => {
   res.status(201).send(campaign);
 });
 
+apiRouter.post('/campaigns/join', verifyAuth, (req, res) => {
+  const code = typeof req.body.code === 'string' ? req.body.code.trim(): '';
+
+  if (!code){
+    return res.status(400).send({msg: 'Campaign code is required'});
+  }
+
+  const campaign = joinCampaign(code, req.user.id);
+
+  if (!campaign){
+    return res.status(404).send({msg: 'Campaign not found'});
+  }
+
+  res.send(campaign);
+})
+
+apiRouter.delete('/campaigns/:id', verifyAuth, (req, res) => {
+  const campaign = campaigns.find(
+    (campaign) => campaign.id === req.params.id
+  );
+
+  if (!campaign || !campaign.memberIds.includes(req.user.id)) {
+    return res.status(404).send({msg: 'Campaign not found'});
+  }
+
+  campaign.memberIds = campaign.memberIds.filter(
+    (memberId) => memberId !== req.user.id
+  );
+
+  res.status(204).end();
+});
+
 
 function createCampaign(code, ownerId){
   const campaign = {
@@ -129,8 +162,8 @@ function createCampaign(code, ownerId){
   return campaign;
 }
 
-function joinCampaign(code, memberIds){
-  const index = campaigns.find(
+function joinCampaign(code, memberId){
+  const campaign = campaigns.find(
     (campaign) =>
       campaign.code.toLowerCase() === code.toLowerCase()
   );
@@ -138,9 +171,11 @@ function joinCampaign(code, memberIds){
   if (!campaign){
     return null;
   }
-  if (!campaign.memberIds.includes(member)){
-    campaign
+  if (!campaign.memberIds.includes(memberId)){
+    campaign.memberIds.push(memberId)
   }
+
+  return campaign;
 
 }
 
