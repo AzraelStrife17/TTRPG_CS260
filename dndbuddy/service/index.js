@@ -1,7 +1,7 @@
 const cookieParser = require('cookie-parser')
 const bcrypt = require('bcryptjs');
 const express = require('express')
-const uuid = require('uuid')
+const uuid = require('uuid');
 const app = express();
 
 const authCookieName = 'token'
@@ -64,7 +64,7 @@ const verifyAuth = async (req, res, next) => {
   }
 };
 
-apiRouter.get('/characters', verifyAuth, (_req, res) => {
+apiRouter.get('/characters', verifyAuth, (req, res) => {
     const userCharacters = characters.filter(
         (character) => character.ownerId === req.user.id
     );
@@ -91,6 +91,43 @@ apiRouter.delete('/characters/:id', verifyAuth, (req, res) => {
     res.status(204).end();
 }
 )
+
+apiRouter.get('/campaigns', verifyAuth, (req, res) => {
+  const userCampaigns = campaigns.filter(
+    (campaign) => campaign.memberIds.includes(req.user.id)
+  );
+  res.send(userCampaigns)
+})
+
+apiRouter.post('/campaigns', verifyAuth, (req, res) => {
+  const code = typeof req.body.code === 'string' ? req.body.code.trim() : '';
+
+  if (!code){
+    return res.status(400).send({msg: 'Campaign code is required'});
+  }
+
+  if (campaigns.some(
+    (campaign) => campaign.code.toLowerCase() === code.toLowerCase()
+  )){
+    return res.status(409).send({msg: 'campaign code already exists'});
+  }
+
+  const campaign = createCampaign(code, req.user.id);
+  res.status(201).send(campaign);
+});
+
+
+function createCampaign(code, ownerId){
+  const campaign = {
+    id: uuid.v4(),
+    code,
+    ownerId,
+    memberIds: [ownerId],
+  };
+
+  campaigns.push(campaign);
+  return campaign;
+}
 
 function updateCharacters(newCharacter, ownerId) {
     const index = characters.findIndex(
