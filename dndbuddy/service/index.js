@@ -129,6 +129,21 @@ function createCampaign(code, ownerId){
   return campaign;
 }
 
+function joinCampaign(code, memberIds){
+  const index = campaigns.find(
+    (campaign) =>
+      campaign.code.toLowerCase() === code.toLowerCase()
+  );
+
+  if (!campaign){
+    return null;
+  }
+  if (!campaign.memberIds.includes(member)){
+    campaign
+  }
+
+}
+
 function updateCharacters(newCharacter, ownerId) {
     const index = characters.findIndex(
         (character) => 
