@@ -1,7 +1,6 @@
 import './charactersheet.css';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { loadCharacters, saveCharacters } from '../data/characterStorage.js';
 
 function getAbilityModifier(score) {
     return Math.floor((score - 10) / 2)
@@ -122,9 +121,10 @@ export default function CharacterSheetRoute() {
 }
 
 function Charactersheet({ characterId }) {
-    const [initialCharacter] = useState(
-        () => loadCharacters().find((character) => character.id === characterId) ?? null
-    );
+    const [initialCharacter, setInitialCharacter] = useState(null);
+    const [characterLoaded, setCharacterLoaded] = useState(false);
+    const [loadError, setLoadError] = useState('');
+    const [saveError, setSaveError] = useState('');
 
     const [hp, setHp] = useState(initialCharacter?.hp ?? 1);
     const [lvl, setLvl] = useState(initialCharacter?.level ?? 1);
@@ -181,35 +181,101 @@ function Charactersheet({ characterId }) {
     const [portraitError, setPortraitError] = useState('');
 
     useEffect(() => {
-        if (!initialCharacter) return;
+        let cancelled = false;
 
-        const characters = loadCharacters();
-        let characterFound = false;
+        async function loadCharacter(){
+            try{
+                const response = await fetch('/api/characters');
 
-        const updateCharacters = characters.map((character) => {
-            if (character.id !== characterId) return character;
+                if (!response.ok){
+                    throw new Error(`Load failed (${response.status})`);
+                }
 
-            characterFound = true;
+                const characters = await response.json()
+                const character = characters.find((item) => item.id === characterId);
 
-            return {
-                ...character,
-                hp,
-                level: lvl,
-                abilities,
-                savePro,
-                skillPro,
-                portrait,
-            };
-        });
+                if (!character) {
+                    throw new Error('Character not found');
+                }
 
-        if (!characterFound) {
-            console.error('Character ${characterId} was not found in localStorage');
-            return;
+                if (cancelled) return;
+
+                setInitialCharacter(character);
+                setHp(character.hp ?? 1);
+                setLvl(character.level ?? 1);
+                setAbilities(character.abilities);
+                setSavePro(character.savePro);
+                setSkillPro(character.skillPro);
+                setPortrait(character.portrait ?? '/dr.tofu.png');
+                setCharacterLoaded(true);
+            }
+            catch (error){
+                if (cancelled) return;
+
+                console.error('Could not load character', error);
+                setLoadError('Could not load this character.');
+            }
         }
 
-        saveCharacters(updateCharacters);
+        loadCharacter();
+
+        return () => {
+            cancelled = true;
+        };
+    }, [characterId]);
+
+    useEffect(() => {
+        if (!characterLoaded || !initialCharacter) return;
+
+        const updatedCharacter = {
+            ...initialCharacter,
+            hp,
+            level: lvl,
+            abilities,
+            savePro,
+            skillPro,
+            portrait,
+        };
+
+        const hasChanges =
+            initialCharacter.hp !== hp ||
+            initialCharacter.level !== lvl ||
+            JSON.stringify(initialCharacter.abilities) !== JSON.stringify(abilities) ||
+            JSON.stringify(initialCharacter.savePro) !== JSON.stringify(savePro) ||
+            JSON.stringify(initialCharacter.skillPro) !== JSON.stringify(skillPro) ||
+            initialCharacter.portrait !== portrait;
+
+        if (!hasChanges) return;
+
+        const controller = new AbortController();
+        const timeoutId = window.setTimeout(async () => {
+            try {
+                const response = await fetch('/api/characters', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updatedCharacter),
+                    signal: controller.signal,
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Save failed (${response.status})`);
+                }
+
+                setSaveError('');
+            } catch (error) {
+                if (controller.signal.aborted) return;
+
+                console.error('Could not save character', error);
+                setSaveError('Could not save changes. Please try again.');
+            }
+        }, 300);
+
+        return () => {
+            window.clearTimeout(timeoutId);
+            controller.abort();
+        };
     }, [
-        characterId,
+        characterLoaded,
         initialCharacter,
         hp,
         lvl,
@@ -289,6 +355,14 @@ function Charactersheet({ characterId }) {
         };
 
         reader.readAsDataURL(file);
+    }
+
+    if (!characterLoaded) {
+        return (
+            <p role={loadError ? 'alert' : undefined}>
+                {loadError || 'Loading character...'}
+            </p>
+        );
     }
 
     return (
@@ -380,6 +454,7 @@ function Charactersheet({ characterId }) {
                     </button>
                 )}
             </div>
+            {saveError && <p role="alert">{saveError}</p>}
 
             <div className="ability_checks">
                 <h2>Ability Checks</h2>
