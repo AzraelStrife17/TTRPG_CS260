@@ -44,6 +44,7 @@ export default function Dashboard() {
   const [joinCode, setJoinCode] = useState('');
   const [joinCharacterId, setJoinCharacterId] = useState('');
   const [joinError, setJoinError] = useState('');
+  const [leaveError, setLeaveError] = useState('');
 
   useEffect(() => {
     try {
@@ -250,20 +251,28 @@ export default function Dashboard() {
     }
   }
 
-  function handleLeave(campaignId) {
-    setCampaigns((currentCampaigns) =>
-      currentCampaigns.flatMap((campaign) => {
+  async function handleLeave(campaignId) {
+    setLeaveError('');
 
-        if (campaign.id !== campaignId) {
-          return [campaign];
-        }
-        if (campaign.otherPlayers > 0) {
-          return [{ ...campaign, character: '' }];
-        }
+    try{
+      const response = await fetch(`/api/campaigns/${campaignId}`, {
+        method: 'DELETE',
+      });
 
-        return [];
-      })
-    );
+      if (!response.ok){
+        const result = await response.json();
+        setLeaveError(result.msg || 'Could not leave. Try again');
+        return;
+      }
+
+      setCampaigns((currentCampaigns) =>
+        currentCampaigns.filter((campaign) => campaign.id !== campaignId)
+      );
+    }
+    catch(error){
+      console.error('Could not leave campaign', error);
+      setLeaveError('Could not leave campaign. Please try again');
+    }
   }
 
   return (
@@ -410,6 +419,7 @@ export default function Dashboard() {
                 )}
               </tbody>
             </table>
+            {leaveError && <p role="alert">{leaveError}</p>}
           </div>
         </section>
       </div>
