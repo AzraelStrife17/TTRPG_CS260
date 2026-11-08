@@ -57,6 +57,24 @@ export default function Dashboard() {
   }, [characters]);
 
   useEffect(() => {
+    async function loadCharactersFromApi() {
+      try{
+        const response = await fetch('/api/characters');
+
+        if (!response.ok){
+          throw new Error(`Could not load characters (${response.status})`);
+        }
+
+        setCharacters(await response.json());
+      } catch (error){
+        console.error('Could not load characters', error);
+      }
+    }
+
+    loadCharactersFromApi();
+  }, []);
+
+  useEffect(() => {
     try{
       window.localStorage.setItem(
         'dndbuddy.campaigns',
@@ -64,11 +82,29 @@ export default function Dashboard() {
       );
     }
     catch (error) {
-      console.error('Could not save campaigns to localStorage', error);
+      console.error('Could not load campaigns to localStorage', error);
     }
   }, [campaigns]);
 
-  function handleCreateCharacter(event) {
+  useEffect(() => {
+    async function loadCampaignsFromApi() {
+      try{
+        const response = await fetch('api/campaigns/');
+
+        if (!response.ok){
+          throw new Error(`Could not load campaigns (${response.status})`);
+        }
+
+        setCampaigns(await response.json());
+      }
+      catch (error){
+        console.error('Could not load campaigns', error)
+      }
+    }
+    loadCampaignsFromApi();
+  },[]);
+
+  async function handleCreateCharacter(event) {
     event.preventDefault();
 
     const name = newName.trim();
@@ -89,23 +125,37 @@ export default function Dashboard() {
       return;
     }
 
-    setCharacters((currentCharacters) => [
-      ...currentCharacters,
-      createCharacterRecord({
-        id: crypto.randomUUID(),
-        name,
-        level: newLevel,
-        className,
-      }),
-    ]);
-
-    setNewName('');
-    setNewLevel(1);
-    setNewClass('');
     setCreateError('');
+
+    const character = createCharacterRecord({
+      id: crypto.randomUUID(),
+      name,
+      level: newLevel,
+      className,
+    });
+
+    try {
+      const response = await fetch('/api/characters', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(character),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Save failed (${response.status})`);
+      }
+
+      setCharacters(await response.json());
+      setNewName('');
+      setNewLevel(1);
+      setNewClass('');
+    } catch (error) {
+      console.error('Could not save character', error);
+      setCreateError('Could not save character. Please try again');
+    }
   }
 
-  function handleCreateCode(event) {
+  async function handleCreateCode(event) {
     event.preventDefault();
 
     const code = newCode.trim();
@@ -120,18 +170,32 @@ export default function Dashboard() {
       return;
     }
 
-    setCampaigns((currentCampaigns) => [
-      ...currentCampaigns,
-      {
-        id: crypto.randomUUID(),
-        code,
-        character: '',
-        otherPlayers: 0,
-      },
-    ]);
-
-    setNewCode('');
     setCodeError('');
+
+    try{
+      const response = await fetch('/api/campaigns', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({code})
+      });
+
+      if (response.status === 409){
+        setCodeError('Code already exists');
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error(`Save failed (${response.status})`);
+      }
+
+      const campaign = await response.json();
+      setCampaigns((currentCampaigns) => [...currentCampaigns, campaign]);
+      setNewCode('');
+    }
+      catch (error) {
+        console.error('Could not save campaign', error);
+        setCodeError('Could not save campaign. Please try again');
+      }
 
   }
 
