@@ -43,6 +43,7 @@ export default function Dashboard() {
 
   const [joinCode, setJoinCode] = useState('');
   const [joinCharacterId, setJoinCharacterId] = useState('');
+  const [joinError, setJoinError] = useState('');
 
   useEffect(() => {
     try {
@@ -89,7 +90,7 @@ export default function Dashboard() {
   useEffect(() => {
     async function loadCampaignsFromApi() {
       try{
-        const response = await fetch('api/campaigns/');
+        const response = await fetch('/api/campaigns');
 
         if (!response.ok){
           throw new Error(`Could not load campaigns (${response.status})`);
@@ -192,26 +193,61 @@ export default function Dashboard() {
       setCampaigns((currentCampaigns) => [...currentCampaigns, campaign]);
       setNewCode('');
     }
-      catch (error) {
-        console.error('Could not save campaign', error);
-        setCodeError('Could not save campaign. Please try again');
-      }
+    catch (error) {
+      console.error('Could not save campaign', error);
+      setCodeError('Could not save campaign. Please try again');
+    }
 
   }
 
-  function handleJoin() {
-    const campaign = campaigns.find(
-      (c) => c.code.toLowerCase() === joinCode.trim().toLowerCase()
-    );
-    const character = characters.find((c) => c.id === joinCharacterId);
+  async function handleJoin() {
+    const code = joinCode.trim();
 
-    if (!campaign || !character) return;
+    if (!code){
+      setJoinError('Enter a Code');
+      return;
+    }
 
-    setCampaigns((currentCampaigns) =>
-      currentCampaigns.map((c) =>
-        c.id === campaign.id ? { ...c, character: character.name } : c
-      )
-    );
+    if (!characters.some((character) => character.id === joinCharacterId)) {
+      setJoinError('Select a character');
+      return;
+    }
+
+    setJoinError('');
+
+    try {
+      const response = await fetch('/api/campaigns/join',{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({code, characterId: joinCharacterId})
+      });
+
+      if (!response.ok){
+        const result = await response.json();
+        setJoinError(result.msg || 'Could not join. Try again');
+        return;
+      }
+
+      const joinedCampaign = await response.json();
+
+      setCampaigns((currentCampaigns) => {
+        const alreadyListed = currentCampaigns.some(
+          (campaign) => campaign.id === joinedCampaign.id
+        );
+
+        return alreadyListed
+          ? currentCampaigns.map((campaign) =>
+              campaign.id === joinedCampaign.id ? joinedCampaign : campaign
+          )
+          : [...currentCampaigns, joinedCampaign];
+      });
+      setJoinError('');
+      setJoinCharacterId('');
+    }
+    catch(error){
+      console.error('Could not join campaign', error);
+      setJoinError('Could not join campaign. Please try again');
+    }
   }
 
   function handleLeave(campaignId) {
@@ -324,6 +360,7 @@ export default function Dashboard() {
               ))}
             </select>
             <button className="btn btn-danger" type="button" onClick={handleJoin}>Join</button>
+            {joinError && <p role="alert">{joinError}</p>}
           </form>
 
           <h2>Create Campaign Code</h2>
@@ -361,7 +398,11 @@ export default function Dashboard() {
                 ) : (
                   campaigns.map((campaign) => (
                     <tr key={campaign.id}>
-                      <td>{campaign.character || 'Not assigned'}</td>
+                      <td>
+                        {characters.find(
+                          (character) => character.id === campaign.characterId
+                        )?.name || 'Not assigned'}
+                      </td>
                       <td>{campaign.code}</td>
                       <td><button type="button" onClick={() => handleLeave(campaign.id)}>Leave</button></td>
                     </tr>
