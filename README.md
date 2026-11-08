@@ -117,14 +117,14 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
-- [ ] **Uses BCrypt to hash passwords** - I did not complete this part of the deliverable.
+- [X] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [X] **Node.js/Express HTTP service** - Added an Express service that runs on port 4000.
+- [X] **Static middleware for frontend (partially completed)** - done
+- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable yet.
+- [X] **Backend service endpoints** - Added auth, character, and campaign endpoints. Data is stored in memory.
+- [X] **Frontend calls service endpoints** - Connected login, logout, dashboard, and character-sheet requests to the service.
+- [X] **Supports registration, login, logout, and restricted endpoint** - Added registration, login, logout, and token-protected routes.
+- [X] **Uses BCrypt to hash passwords** - Uses `bcryptjs` to hash passwords and verify logins.
 
 ## 🚀 DB deliverable
 
