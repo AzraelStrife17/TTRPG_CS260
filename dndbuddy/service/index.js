@@ -154,32 +154,36 @@ apiRouter.post('/campaigns', verifyAuth, async (req, res, next) => {
   }
 });
 
-apiRouter.post('/campaigns/join', verifyAuth, (req, res) => {
-  const code = typeof req.body.code === 'string' ? req.body.code.trim(): '';
-  const characterId =
-    typeof req.body.characterId === 'string' ? req.body.characterId.trim() : '';
+apiRouter.post('/campaigns/join', verifyAuth, async (req, res, next) => {
+  try{
+    const code = typeof req.body.code === 'string' ? req.body.code.trim(): '';
+    const characterId =
+      typeof req.body.characterId === 'string' ? req.body.characterId.trim() : '';
 
-  if (!code || !characterId){
-    return res.status(400).send({msg: 'Campaign code and character are required'});
+    if (!code || !characterId){
+      return res.status(400).send({msg: 'Campaign code and character are required'});
+    }
+
+    const character = await DB.collection('characters').findOne({
+      id: characterId,
+      ownerId: req.user.id,
+    });
+    
+    if (!character) {
+      return res.status(404).send({msg: 'Character not found'});
+    }
+
+    const campaign = await joinCampaign(code, req.user.id, characterId);
+
+    if (!campaign){
+      return res.status(404).send({msg: 'Campaign not found'});
+    }
+
+    res.send(campaignForMember(campaign, req.user.id));
   }
-
-  const character = characters.find(
-    (character) =>
-      character.id === characterId &&
-      character.ownerId === req.user.id
-  );
-
-  if (!character) {
-    return res.status(404).send({msg: 'Character not found'});
+  catch (error){
+    next(error)
   }
-
-  const campaign = joinCampaign(code, req.user.id, characterId);
-
-  if (!campaign){
-    return res.status(404).send({msg: 'Campaign not found'});
-  }
-
-  res.send(campaignForMember(campaign, req.user.id));
 })
 
 apiRouter.delete('/campaigns/:id', verifyAuth, (req, res) => {
@@ -221,10 +225,10 @@ function campaignForMember(campaign, userId){
   };
 }
 
-function joinCampaign(code, userId, characterId){
-  const campaign = campaigns.find(
-    (campaign) =>
-      campaign.code.toLowerCase() === code.toLowerCase()
+async function joinCampaign(code, userId, characterId){
+  const campaign = await DB.collection('campaigns').findOne(
+    { code },
+    { collation: { locale: 'en', strength: 2 } }
   );
 
   if (!campaign){
@@ -241,7 +245,12 @@ function joinCampaign(code, userId, characterId){
     campaign.members.push({ userId, characterId });
   }
 
-  return campaign;
+  await DB.collection('campaigns').updateOne(
+    {id: campaign.id},
+    {$set: { members: campaign.members}}
+  )
+
+  return campaign
 
 }
 
