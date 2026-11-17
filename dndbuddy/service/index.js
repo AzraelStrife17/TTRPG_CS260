@@ -3,7 +3,8 @@ const bcrypt = require('bcryptjs');
 const express = require('express')
 const uuid = require('uuid');
 const app = express();
-const DB = require('./database.js')
+const DB = require('./database.js');
+const e = require('express');
 
 const authCookieName = 'token'
 
@@ -168,7 +169,7 @@ apiRouter.post('/campaigns/join', verifyAuth, async (req, res, next) => {
       id: characterId,
       ownerId: req.user.id,
     });
-    
+
     if (!character) {
       return res.status(404).send({msg: 'Character not found'});
     }
@@ -186,20 +187,27 @@ apiRouter.post('/campaigns/join', verifyAuth, async (req, res, next) => {
   }
 })
 
-apiRouter.delete('/campaigns/:id', verifyAuth, (req, res) => {
-  const campaign = campaigns.find(
-    (campaign) => campaign.id === req.params.id
-  );
+apiRouter.delete('/campaigns/:id', verifyAuth, async (req, res, next) => {
+  try{
+    const result = await DB.collection('campaigns').updateOne(
+      {
+        id: req.params.id,
+        'members.userId': req.user.id,
+      },
+      {
+        $pull: {members: {userId: req.user.id}},
+      }
+    );
 
-  if (!campaign || !campaign.members.some((member) => member.userId === req.user.id)) {
-    return res.status(404).send({msg: 'Campaign not found'});
+    if (result.matchedCount === 0){
+      return res.status(404).send({msg: 'Campaign not found'});
+    }
+
+    res.status(204).end();
   }
-
-  campaign.members = campaign.members.filter(
-    (member) => member.userId !== req.user.id
-  );
-
-  res.status(204).end();
+  catch (error){
+    next(error)
+  }
 });
 
 
