@@ -111,32 +111,47 @@ apiRouter.delete('/characters/:id', verifyAuth, async (req, res, next) => {
 }
 )
 
-apiRouter.get('/campaigns', verifyAuth, (req, res) => {
-  const userCampaigns = campaigns
-    .filter((campaign) =>
-      campaign.members.some((member) => member.userId === req.user.id)
-    )
-    .map((campaign) => campaignForMember(campaign, req.user.id));
+apiRouter.get('/campaigns', verifyAuth, async (req, res, next) => {
+  try{
+    const userCampaigns = await DB
+      .collection('campaigns')
+      .find({'members.userId': req.user.id})
+      .toArray()
 
-  res.send(userCampaigns)
-})
+    res.send(userCampaigns.map((campaign) =>
+      campaignForMember(campaign, req.user.id)
+    ))
+  }
+  catch (error){
+    next(error)
+  }
+}
+)
 
 
-apiRouter.post('/campaigns', verifyAuth, (req, res) => {
+apiRouter.post('/campaigns', verifyAuth, async (req, res, next) => {
   const code = typeof req.body.code === 'string' ? req.body.code.trim() : '';
 
-  if (!code){
-    return res.status(400).send({msg: 'Campaign code is required'});
-  }
+  try{
+    if (!code){
+      return res.status(400).send({msg: 'Campaign code is required'});
+    }
 
-  if (campaigns.some(
-    (campaign) => campaign.code.toLowerCase() === code.toLowerCase()
-  )){
-    return res.status(409).send({msg: 'campaign code already exists'});
-  }
+    const existingCampaign = await DB.collection('campaigns').findOne(
+      { code },
+      { collation: { locale: 'en', strength: 2 } }
+    );
 
-  const campaign = createCampaign(code, req.user.id);
-  res.status(201).send(campaignForMember(campaign, req.user.id));
+    if (existingCampaign) {
+      return res.status(409).send({ msg: 'Campaign code already exists' });
+    }
+
+    const campaign = await createCampaign(code, req.user.id);
+    res.status(201).send(campaignForMember(campaign, req.user.id));
+  }
+  catch(error){
+    next(error)
+  }
 });
 
 apiRouter.post('/campaigns/join', verifyAuth, (req, res) => {
@@ -184,7 +199,7 @@ apiRouter.delete('/campaigns/:id', verifyAuth, (req, res) => {
 });
 
 
-function createCampaign(code, ownerId){
+async function createCampaign(code, ownerId){
   const campaign = {
     id: uuid.v4(),
     code,
@@ -192,7 +207,7 @@ function createCampaign(code, ownerId){
     members: [{ userId: ownerId, characterId: null }],
   };
 
-  campaigns.push(campaign);
+  await DB.collection('campaigns').insertOne(campaign)
   return campaign;
 }
 
