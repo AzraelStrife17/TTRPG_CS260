@@ -4,13 +4,8 @@ const express = require('express')
 const uuid = require('uuid');
 const app = express();
 const DB = require('./database.js');
-const e = require('express');
 
 const authCookieName = 'token'
-
-let users = [];
-let characters = [];
-let campaigns = [];
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -295,7 +290,7 @@ async function createUser(email, password) {
     password: passwordHash,
     token: uuid.v4(),
   };
-  users.push(user);
+  await DB.addUser(user);
 
   return user;
 }
@@ -303,7 +298,14 @@ async function createUser(email, password) {
 async function findUser(field, value) {
   if (!value) return null;
 
-  return users.find((u) => u[field] === value);
+  if (field === 'token') {
+    return DB.getUserByToken(value);
+  }
+  if (field === 'email') {
+    return DB.getUser(value);
+  }
+
+  throw new Error(`Unsupported user lookup field: ${field}`);
 }
 
 function setAuthCookie(res, authToken) {
