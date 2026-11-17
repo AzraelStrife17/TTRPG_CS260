@@ -15,3 +15,5 @@ const db = client.db('simon');
     process.exit(1);
   }
 })();
+
+module.exports = db;
